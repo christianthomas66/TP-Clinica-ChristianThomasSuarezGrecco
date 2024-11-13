@@ -52,6 +52,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage()), // Añade BrowserAnimationsModule aquí
+    //provideStorage(() => getStorage()), provideFirebaseApp(() => initializeApp({"projectId":"tp-clinica-christianthomas","appId":"1:179800149077:web:c786875929afdf4b2d98dc","storageBucket":"tp-clinica-christianthomas.firebasestorage.app","apiKey":"AIzaSyBwCGCWWdm3Hv1gWYit9LhfGgFheRRYO6g","authDomain":"tp-clinica-christianthomas.firebaseapp.com","messagingSenderId":"179800149077"})), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()), provideStorage(() => getStorage()), // Añade BrowserAnimationsModule aquí
   ],
 };

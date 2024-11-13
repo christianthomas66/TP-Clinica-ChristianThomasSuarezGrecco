@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, User, sendEmailVerification, getAuth } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, User, sendEmailVerification, getAuth, authState } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Firestore, addDoc, collection, doc, getDocs, getFirestore, query, updateDoc, where } from '@angular/fire/firestore';
 import Swal from 'sweetalert2';
@@ -17,8 +17,8 @@ export class AuthService {
   db : Firestore;
   usuario : User | null = null;
 
-  constructor(private autenticacion: AngularFireAuth, public auth: Auth) {
-    this.db = getFirestore();
+  constructor(public auth: Auth, private _firestore: Firestore) {
+    this.db = _firestore;
     onAuthStateChanged(this.auth, (user) => {
     this.usuario = user;
     });
@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   obtenerUsuarioConectado(){
-    return this.autenticacion.authState;
+    return authState(this.auth);
   }
 
   obtenerUsuarioActual(): User | null {

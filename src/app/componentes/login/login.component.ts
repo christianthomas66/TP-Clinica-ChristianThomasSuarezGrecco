@@ -32,7 +32,7 @@ export default class LoginComponent implements OnInit {
     { email: 'naxit88876@apn7.com', password: 'paciente3', tipo: 'Paciente Carlos', imagen: 'assets/img/paciente.png' },
     { email: 'literiv375@bacaki.com', password: 'especialista1', tipo: 'Especialista Laura', imagen: 'assets/img/especialista.png' },
     { email: 'ketoyil643@bsidesmn.com', password: 'especialista2', tipo: 'Especialista Miguel', imagen: 'assets/img/especialista.png' },
-    { email: 'mimado9373@atebin.com', password: 'admin1', tipo: 'Administrador Francis', imagen: 'assets/img/admin.png' }
+    { email: 'mimado9373@atebin.com', password: 'admin1', tipo: 'Administrador Christian Thomas', imagen: 'assets/img/admin.png' }
   ];
 
   constructor(

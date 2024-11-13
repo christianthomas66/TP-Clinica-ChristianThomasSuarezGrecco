@@ -11,5 +11,5 @@ import { BarranavComponent } from './componentes/barranav/barranav.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Clinica Online por Francis Romero';
+  title = 'Clinica Online por Christian Thomas Suarez Grecco';
 }
