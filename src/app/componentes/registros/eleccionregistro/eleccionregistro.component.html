@@ -1,12 +1,16 @@
 <app-barranavinicial @fadeScaleAnimation></app-barranavinicial>
-<div class="container mt-5">
-  <div class="registro-buttons text-center">
-    <button class="btn btn-gpt btn-lg rounded-pill" (click)="mostrarRegistro('paciente')" [class.active]="mostrarRegistroPacientes">
-      <img src="assets/img/paciente.png" alt="Registro de Paciente" class="registro-icon">
-    </button>
-    <button class="btn btn-gpt btn-lg rounded-pill" (click)="mostrarRegistro('especialista')" [class.active]="mostrarRegistroEspecialistas">
-      <img src="assets/img/especialista.png" alt="Registro de Especialista" class="registro-icon">
-    </button>
+<div class="container">
+  <div class="card-choose">
+    <div *ngIf="!mostrarRegistroPacientes">
+      <button class="card bg-dark" (click)="mostrarRegistro('especialista')" [class.active]="mostrarRegistroEspecialistas">
+        <img src="assets/img/especialista.png" alt="Registro de Especialista" class="registro-icon">
+      </button>
+    </div>
+    <div *ngIf="!mostrarRegistroEspecialistas">
+      <button class="card bg-dark" (click)="mostrarRegistro('paciente')" [class.active]="mostrarRegistroPacientes">
+        <img src="assets/img/paciente.png" alt="Registro de Paciente" class="registro-icon">
+      </button>
+    </div>
   </div>
 </div>
 

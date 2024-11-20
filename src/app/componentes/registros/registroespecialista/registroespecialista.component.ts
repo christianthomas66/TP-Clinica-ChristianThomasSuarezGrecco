@@ -5,6 +5,7 @@ import {
   FormGroup,
   ReactiveFormsModule,
   Validators,
+  AbstractControl
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Especialidad } from '../../../clases/especialidad';
@@ -33,23 +34,96 @@ export default class RegistroespecialistaComponent {
   captchaResuelto: boolean = false; // Variable para controlar el captcha
   captchaHabilitado: boolean = true; // Variable para habilitar o deshabilitar el captcha
 
+  especialidadesClinica: string[] = [
+   "Especialidades Médicas",
+   "Clínica Médica",
+   "Pediatría",
+   "Ginecología y Obstetricia",
+   "Cardiología",
+   "Neurología",
+   "Dermatología",
+   "Traumatología y Ortopedia",
+   "Gastroenterología",
+   "Nefrología",
+   "Endocrinología",
+   "Reumatología",
+   "Hematología",
+   "Neumonología",
+   "Alergología e Inmunología Clínica",
+   "Infectología",
+   "Oncología",
+   "Oftalmología",
+   "Otorrinolaringología",
+   "Psiquiatría",
+   "Urología",
+ 
+   // Especialidades Quirúrgicas
+   "Cirugía General",
+   "Cirugía Plástica y Reparadora",
+   "Cirugía Cardiovascular",
+   "Neurocirugía",
+   "Cirugía Pediátrica",
+   "Cirugía Vascular",
+   "Traumatología y Cirugía Ortopédica",
+ 
+   // Diagnóstico y Tratamiento
+   "Imágenes y Radiología",
+   "Medicina Nuclear",
+   "Laboratorio Clínico",
+   "Endoscopía Digestiva",
+   "Terapia Intensiva",
+   "Terapia Intermedia",
+   "Medicina de Rehabilitación y Fisiatría",
+ 
+   // Especialidades Odontológicas
+   "Odontología General",
+   "Ortodoncia",
+   "Endodoncia",
+   "Periodoncia",
+   "Implantología",
+   "Cirugía Maxilofacial",
+ 
+   // Salud Mental y Psicológica
+   "Psicología Clínica",
+   "Psicopedagogía",
+   "Terapia Ocupacional",
+ 
+   // Medicina Preventiva
+   "Nutrición y Dietética",
+   "Medicina del Deporte",
+   "Medicina Familiar y General",
+   "Medicina Laboral",
+   "Inmunizaciones y Vacunación",
+ 
+   // Especialidades Complementarias
+   "Fonoaudiología",
+   "Kinesiología y Fisioterapia",
+   "Podología",
+ 
+   // Especialidades en Desarrollo
+   "Medicina Genómica",
+   "Telemedicina",
+   "Cuidados Paliativos",
+   "Sexología Clínica"
+ ];
+
   constructor(private autenticacion: AuthService, private ruta: Router) {}
 
   ngOnInit(): void {
     this.formulario = new FormGroup({
-      especialistaNombre: new FormControl('', [Validators.required]),
-      especialistaApellido: new FormControl('', [Validators.required]),
+      especialistaNombre: new FormControl('', [Validators.pattern('^[a-zA-Z]+$'), Validators.required]),
+      especialistaApellido: new FormControl('', [Validators.pattern('^[a-zA-Z]+$'), Validators.required]),
       especialistaEdad: new FormControl('', [
         Validators.required,
-        Validators.min(1),
-        Validators.max(100),
+        Validators.min(18),
+        Validators.max(80),
       ]),
       especialistaDni: new FormControl('', [
         Validators.required,
         Validators.min(1),
         Validators.max(100000000),
       ]),
-      OtraEspecialidad: new FormControl(''),
+      OtraEspecialidad: new FormControl('', this.validateSpecialist(this.especialidadesClinica)),
       agregarOtraEspecialidad: new FormControl(''),
       especialistaEmail: new FormControl('', [
         Validators.required,
@@ -64,6 +138,16 @@ export default class RegistroespecialistaComponent {
 
     this.cargarEspecialidades();
   }
+
+  validateSpecialist(especialidadesClinica: string[]) {
+    return (control: AbstractControl): object | null => {
+      if (especialidadesClinica.includes(control.value) || control.value == '') return null;
+  
+      return {
+        hasSpecialist: true
+      };
+    };
+  }  
 
   enImagenSeleccionada(event: any) {
     const archivo = event.target.files[0];
@@ -107,13 +191,13 @@ export default class RegistroespecialistaComponent {
     const especialidadNombre =
       this.formulario.controls['OtraEspecialidad'].value.trim();
     if (especialidadNombre !== '') {
-      await this.autenticacion.guardarEspecialidad(especialidadNombre);
+      await this.autenticacion.guardarEspecialidad(especialidadNombre, this.especialidadesClinica);
       this.formulario.controls['OtraEspecialidad'].setValue('');
     } else {
       Swal.fire({
         icon: 'error',
         title: 'Error al registrar',
-        text: 'La especialidad ya existe en la lista.',
+        text: 'Por favor agregue una especialidad válida.',
         timer: 4000,
       });
     }
@@ -126,6 +210,10 @@ export default class RegistroespecialistaComponent {
         this.formulario.get(`especialidad_${especialidad.uid}`)?.value
     );
     console.log(especialidadesSeleccionadas);
+    console.log("===== FORMULARIO REGISTRO =====");
+    console.log(this.formulario);
+    console.log(this.formulario.valid);
+    console.log("===============================");
     if (this.formulario.valid) {
       this.cargarUsuario();
     } else {

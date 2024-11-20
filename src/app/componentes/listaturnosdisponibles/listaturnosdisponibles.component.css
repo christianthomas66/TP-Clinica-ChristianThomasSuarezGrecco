@@ -1,5 +1,9 @@
 /* styles.css (o tu archivo CSS principal) */
 
+.card-body{
+  background-color: rgba(68, 68, 87, 0.901);
+}
+
 /* Estilos para los botones de especialista */
 .especialista-btn {
   border-radius: 10px;

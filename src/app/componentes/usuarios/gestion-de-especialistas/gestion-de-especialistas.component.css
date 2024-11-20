@@ -3,3 +3,11 @@
   max-width: 300px; /* Ajusta este valor según lo necesario */
   margin: 0 auto;
 }
+
+.box-especialistas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}

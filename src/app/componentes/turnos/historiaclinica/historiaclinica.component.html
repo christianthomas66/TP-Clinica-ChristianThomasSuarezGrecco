@@ -147,35 +147,9 @@
         </small>
       </div>
     </div>
-    <div class="form-group">
-      <label for="numerico">Numérico:</label>
-      <input
-        type="number"
-        formControlName="numerico"
-        id="numerico"
-        class="form-control"
-      />
-      <div *ngIf="form.get('datosDinamicos.numerico').errors">
-        <small class="invalid" *ngIf="form.get('datosDinamicos.numerico').errors!['required']">
-          Debe ingresar un valor numérico.
-        </small>
-      </div>
-    </div>
+    
 
-    <div class="form-group">
-      <label for="nombreSwitch">Nombre/Descripción del dato dinámico switch:</label>
-      <input
-        type="text"
-        formControlName="nombreSwitch"
-        id="nombreSwitch"
-        class="form-control"
-      />
-      <div *ngIf="form.get('datosDinamicos.nombreSwitch').errors">
-        <small class="invalid" *ngIf="form.get('datosDinamicos.nombreSwitch').errors!['required']">
-          Debe ingresar un nombre o descipcion al dato dinamico switch.
-        </small>
-      </div>
-    </div>
+    
     <div class="form-group">
       <label for="switch">Switch:</label>
       <div class="form-check">

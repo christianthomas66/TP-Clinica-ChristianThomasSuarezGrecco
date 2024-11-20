@@ -38,12 +38,12 @@ export default class RegistropacienteComponent {
 
   ngOnInit(): void {
     this.formulario = new FormGroup({
-      pacienteNombre: new FormControl('', [Validators.required]),
-      pacienteApellido: new FormControl('', [Validators.required]),
+      pacienteNombre: new FormControl('', [Validators.pattern('^[a-zA-Z]+$'), Validators.required]),
+      pacienteApellido: new FormControl('', [Validators.pattern('^[a-zA-Z]+$'), Validators.required]),
       pacienteEdad: new FormControl('', [
         Validators.required,
-        Validators.min(1),
-        Validators.max(110),
+        Validators.min(5),
+        Validators.max(100),
       ]),
       pacienteDni: new FormControl('', [
         Validators.required,

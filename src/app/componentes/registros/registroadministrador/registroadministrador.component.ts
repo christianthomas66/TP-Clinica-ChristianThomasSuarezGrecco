@@ -35,12 +35,12 @@ export default class RegistroadministradorComponent {
   constructor(private servicioDeAutenticacion: AuthService) {}
   ngOnInit(): void {
     this.formulario = new FormGroup({
-      nombreAdmin: new FormControl('', [Validators.required]),
-      apellidoAdmin: new FormControl('', [Validators.required]),
+      nombreAdmin: new FormControl('', [Validators.pattern('^[a-zA-Z]+$'), Validators.required]),
+      apellidoAdmin: new FormControl('', [Validators.pattern('^[a-zA-Z]+$'), Validators.required]),
       edadAdmin: new FormControl('', [
         Validators.required,
-        Validators.min(1),
-        Validators.max(110),
+        Validators.min(21),
+        Validators.max(80),
       ]),
       dniAdmin: new FormControl('', [
         Validators.required,

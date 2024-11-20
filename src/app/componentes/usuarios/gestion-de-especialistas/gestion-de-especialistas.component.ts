@@ -5,24 +5,50 @@ import { AuthService } from '../../../services/auth.service';
 import { RouterOutlet } from '@angular/router';
 import { AdminNavbarComponent } from '../admin-navbar/admin-navbar.component';
 import { fadeScaleAnimation } from '../../../animacion';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { Firestore, addDoc, collection, doc, getDocs, getFirestore, query, updateDoc, where } from '@angular/fire/firestore';
 
-@Component({
+@Component({ 
   selector: 'app-gestion-de-especialistas',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, AdminNavbarComponent],
+  imports: [CommonModule, RouterOutlet, AdminNavbarComponent, NgbNavModule],
   templateUrl: './gestion-de-especialistas.component.html',
   styleUrl: './gestion-de-especialistas.component.css',
   animations: [fadeScaleAnimation]
 })
 export default class GestionDeEspecialistasComponent {
+  active = 1;
   especialistas: Especialista[] = [];
+  administradores: any[] = [];
+  pacientes: any[] = [];
   loading: boolean = false;
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private _firestore: Firestore) {}
 
   async ngOnInit(): Promise<void> {
     this.loading = true;
     await this.cargarEspecialistas();
+    await this.getAdminList();
+    await this.getPatientList();
+    console.log(this.pacientes);
     this.loading = false;
+  }
+
+  async getAdminList(): Promise<void> {
+    const docRef = collection(this._firestore, 'admins');
+    const querySnapshot = await getDocs(docRef);
+
+    this.administradores = querySnapshot.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() };
+      });
+  }
+
+  async getPatientList(): Promise<void> {
+    const docRef = collection(this._firestore, 'pacientes');
+    const querySnapshot = await getDocs(docRef);
+
+    this.pacientes = querySnapshot.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() };
+      });
   }
 
   async cargarEspecialistas() {

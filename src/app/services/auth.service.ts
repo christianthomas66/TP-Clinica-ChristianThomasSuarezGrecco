@@ -225,12 +225,13 @@ export class AuthService {
     }
   }
 
-  async guardarEspecialidad(especialidadNombre: string): Promise<void> {
+  async guardarEspecialidad(especialidadNombre: string, especialidadesClinica: string[]): Promise<void> {
     const especialidades = await this.obtenerEspecialidades();
     const especialidadExistente = especialidades.find(
       (especialidad) => especialidad.nombre === especialidadNombre
     );
-    if (!especialidadExistente) {
+
+    if (!especialidadExistente && especialidadesClinica.includes(especialidadNombre)) {
       try {
         const docRef = await addDoc(collection(this.db, 'especialidades'), {
           nombre: especialidadNombre,
@@ -478,6 +479,7 @@ export class AuthService {
 
   public async guardarHistoriaClinica(historia: HistoriaClinica) {
     try {
+      console.log(historia)
       const docRef = await addDoc(collection(this.db, 'historiasClinicas'), {
         altura: historia.altura,
         peso: historia.peso,

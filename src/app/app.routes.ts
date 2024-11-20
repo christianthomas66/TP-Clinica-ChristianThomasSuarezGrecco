@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import {canActivate,redirectUnauthorizedTo,redirectLoggedInTo } from "@angular/fire/auth-guard"
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: '', redirectTo: 'bienvenida', pathMatch: 'full' },
     {
       path: "login",
       loadComponent: () => import("./componentes/login/login.component"),
@@ -39,6 +39,10 @@ export const routes: Routes = [
     {
       path: 'usuariospacientes',
       loadComponent: () => import('./componentes/usuarios-pacientes/usuarios-pacientes.component')
+    },
+    {
+      path: 'bienvenida',
+      loadComponent: () => import('./componentes/pagina-bienvenida/pagina-bienvenida.component').then(m => m.PaginaBienvenidaComponent)
     },
     {
       path: "**", //¿estoy en cualquier ruta?

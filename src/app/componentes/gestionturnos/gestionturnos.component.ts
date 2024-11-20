@@ -1,11 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ChangeDetectorRef } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
 import { Especialidad } from '../../clases/especialidad';
 import { Especialista } from '../../clases/especialista';
@@ -174,7 +169,7 @@ export default class GestionturnosComponent {
     this.fechaObtenida = true;
 
     Swal.fire({
-      icon: 'warning',
+      icon: 'success',
       title:
         'La fecha seleccionada: ' +
         fechaSeleccionada +
@@ -250,7 +245,6 @@ export default class GestionturnosComponent {
 
     return true;
   }
-
 
   async cargarTurno(paciente: string) {
     try {

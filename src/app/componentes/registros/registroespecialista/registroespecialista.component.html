@@ -36,7 +36,7 @@
                     <div *ngIf="formulario.controls['especialistaEdad'].errors && formulario.controls['especialistaEdad'].touched">
                       <span style="color: red;" *ngIf="formulario.controls['especialistaEdad'].errors['required']">Debe ingresar la edad del especialista.</span>
                       <span style="color: red;" *ngIf="formulario.controls['especialistaEdad'].errors['min']">La edad del especialista debe ser mayor o igual a 1.</span>
-                      <span style="color: red;" *ngIf="formulario.controls['especialistaEdad'].errors['max']">La edad del especialista debe ser menor o igual a 105.</span>
+                      <span style="color: red;" *ngIf="formulario.controls['especialistaEdad'].errors['max']">La edad del especialista debe ser menor o igual a 100.</span>
                     </div>
                   </div>
                 </div>
@@ -89,7 +89,11 @@
                     <div class="form-check">
                       <input type="checkbox" class="form-check-input" id="otraEspecialidadCheckbox" formControlName="agregarOtraEspecialidad" />
                       <label class="form-check-label" for="otraEspecialidadCheckbox">Agregar Otra:</label>
+
                       <input *ngIf="formulario.controls['agregarOtraEspecialidad'].value" type="text" class="form-control" formControlName="OtraEspecialidad" />
+                      <div *ngIf="formulario.controls['OtraEspecialidad'].errors && formulario.controls['OtraEspecialidad'].touched">
+                        <span style="color: red;" *ngIf="formulario.controls['OtraEspecialidad'].errors['hasSpecialist']">No es una especialidad valida.</span>
+                      </div>
                     </div>
                     <button type="button" class="btn btn-primary m-2" (click)="agregarEspecialidad()">Agregar</button>
                   </div>

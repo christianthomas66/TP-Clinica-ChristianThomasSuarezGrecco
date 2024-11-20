@@ -10,6 +10,28 @@
   border-color: #636363;
 }
 
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-choose {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.card {
+  padding: 80px 48px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .registro-buttons {
   display: flex;
   justify-content: center;

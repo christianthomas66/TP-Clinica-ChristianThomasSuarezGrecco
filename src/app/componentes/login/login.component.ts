@@ -27,12 +27,12 @@ export default class LoginComponent implements OnInit {
   registroActivo: boolean = false;
 
   usuariosAccesoRapido = [
-    { email: 'pacake7525@apn7.com', password: 'paciente1', tipo: 'Paciente Juan', imagen: 'assets/img/paciente.png' },
-    { email: 'jaxale2608@bsidesmn.com', password: 'paciente2', tipo: 'Paciente Maria', imagen: 'assets/img/paciente.png' },
-    { email: 'naxit88876@apn7.com', password: 'paciente3', tipo: 'Paciente Carlos', imagen: 'assets/img/paciente.png' },
-    { email: 'literiv375@bacaki.com', password: 'especialista1', tipo: 'Especialista Laura', imagen: 'assets/img/especialista.png' },
-    { email: 'ketoyil643@bsidesmn.com', password: 'especialista2', tipo: 'Especialista Miguel', imagen: 'assets/img/especialista.png' },
-    { email: 'mimado9373@atebin.com', password: 'admin1', tipo: 'Administrador Christian Thomas', imagen: 'assets/img/admin.png' }
+    { email: 'jaffiddaujixu-2835@yopmail.com', password: '123456', tipo: 'Paciente Joana', imagen: 'assets/img/pac1.jpg' },
+    { email: 'crihadelludda-9566@yopmail.com', password: '123456', tipo: 'Paciente Carlos', imagen: 'assets/img/pac2.jpg' },
+    { email: 'gregrakequetto-5258@yopmail.com', password: '123456', tipo: 'Paciente Eugenio', imagen: 'assets/img/pac3.jpg' },
+    { email: 'savoissisifra-7468@yopmail.com', password: '123456', tipo: 'Especialista Melisa', imagen: 'assets/img/esp1.jpg' },
+    { email: 'hugifoquicro-8345@yopmail.com', password: '123456', tipo: 'Especialista Miguel', imagen: 'assets/img/esp2.jpg' },
+    { email: 'christian022198@gmail.com', password: '1234567', tipo: 'Administrador Christian Thomas', imagen: 'assets/img/thomyadmin.jpg' }
   ];
 
   constructor(
@@ -86,11 +86,11 @@ export default class LoginComponent implements OnInit {
     try {
       const admin = await this.autenticacion.getUserByUidAndType(
         usuario.user.uid,
-        'admins'
+        'admins' // -> ACA FIJATE si no se como no lo
       );
       const especialista = await this.autenticacion.getUserByUidAndType(
         usuario.user.uid,
-        'especialistas'
+        'especialistas'        
       );
       if (admin !== null) {
         await this.guardarLogueos(usuario.user.email);
@@ -108,8 +108,10 @@ export default class LoginComponent implements OnInit {
           return;
         }
         if (especialista.verificado === 'null') {
+          console.log(especialista);
           this.mensajesEmergentes.mostrarMensajeRechazado();
         } else if (especialista.verificado === 'false') {
+          console.log(especialista);
           await this.autenticacion.cerrarSesion();
           this.mensajesEmergentes.mostrarMensajeNoAprobado();
         } else {

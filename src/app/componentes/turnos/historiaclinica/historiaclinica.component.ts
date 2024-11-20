@@ -1,12 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import {
-  AbstractControl,
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { HistoriaClinica } from '../../../clases/historiaClinica';
 import { Turno } from '../../../clases/turno';
 import { AuthService } from '../../../services/auth.service';
@@ -42,10 +35,8 @@ export class HistoriaclinicaComponent  {
       presion: ['', Validators.required],
       datosDinamicos: this.fb.group({
         nombreRango: ['', Validators.required],
-        rango: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
+        rango: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
         nombreNumerico: ['', Validators.required],
-        numerico: [null, Validators.required],
-        nombreSwitch: ['', Validators.required],
         switch: [false, Validators.required],
       }),
     });
@@ -56,8 +47,8 @@ export class HistoriaclinicaComponent  {
 
     if (datosDinamicos && datosDinamicos.length < 3) {
       const nuevoDato = this.fb.group({
-        clave: [null, Validators.required],
-        valor: [null, Validators.required],
+        clave: ['', Validators.required],
+        valor: ['', Validators.required],
       });
       datosDinamicos.push(nuevoDato);
     }
@@ -94,6 +85,9 @@ export class HistoriaclinicaComponent  {
 
       console.log(this.historiaClinica);
       let id = await this.firestoreService.guardarHistoriaClinica(this.historiaClinica);
+      console.log("===== HISTORIA CLINICA ID =====");
+      console.log(id);
+      console.log("===== HISTORIA CLINICA ID =====");
       if (id) {
         try {
           this.turno.historiaClinica = this.historiaClinica;
