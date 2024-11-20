@@ -7,11 +7,17 @@ import { Especialista } from '../../clases/especialista';
 import { Horario } from '../../clases/horario';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import pdfMake from 'pdfmake/build/pdfmake';
+
+
 import { BarranavComponent } from '../barranav/barranav.component';
 import { AdminNavbarComponent } from '../usuarios/admin-navbar/admin-navbar.component';
 import { EspecialistaNavbarComponent } from '../especialista-navbar/especialista-navbar.component';
 import { fadeScaleAnimation } from './../../animacion';
+
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
+(<any>pdfMake).addVirtualFileSystem(pdfFonts);
 
 @Component({
   selector: 'app-miperfil',
@@ -39,6 +45,8 @@ export default class MiPerfilComponent implements OnInit {
   historiasClinicas: Turno[] = [];
   especialistasT: Especialista[] = [];
   loading: boolean = false;
+
+  
 
   constructor(
     private authService: AuthService,
@@ -130,6 +138,7 @@ export default class MiPerfilComponent implements OnInit {
         const reader = new FileReader();
         reader.onloadend = () => {
           const base64data = reader.result;
+          console.log(base64data);
           resolve(base64data as string);
         };
         reader.onerror = () => {
@@ -145,12 +154,17 @@ export default class MiPerfilComponent implements OnInit {
     let now = new Date();
     let fechaEmision = `${now.getDate()}/${
       now.getMonth() + 1
-    }/${now.getFullYear()} a las ${now.getHours()}:${now.getMinutes()} hs`;
-
+      }/${now.getFullYear()} a las ${now.getHours()}:${now.getMinutes()} hs`;
+      
+      
     // Ordenar las historias clínicas por fecha
     historiasPruebaPdf.sort(
       (a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime()
     );
+    console.log("===== CREAR PDF =====");
+    console.log(historiasPruebaPdf);
+    console.log("===== CREAR PDF =====");
+    
     let historiasClinicasArray = historiasPruebaPdf.map((historiaPruebaPdf) => {
       // Crear un objeto con solo los datos que quieres incluir
 
@@ -165,7 +179,10 @@ export default class MiPerfilComponent implements OnInit {
         temperatura: historiaPruebaPdf.historiaClinica?.temperatura,
         datosDinamicos: historiaPruebaPdf.historiaClinica?.datosDinamicos,
       };
+      console.log(historiaPruebaPdf);
+      console.log(" BIEN???!!!");
       return historiaClinicaSeleccionada;
+
     });
 
     let pdfDefinition: any = {
@@ -267,11 +284,20 @@ export default class MiPerfilComponent implements OnInit {
       defaultStyle: {
         fontSize: 12,
         columnGap: 20,
+        font: 'Roboto'
       },
     };
+    console.log(historiasPruebaPdf);
+    console.log("BIEN 2 (????");
 
+    console.log("===== ANTES DEL ERROR =====");
+    console.log(pdfDefinition);
+    console.log("===== ANTES DEL ERROR =====");
     const pdf = pdfMake.createPdf(pdfDefinition);
     pdf.download('HistoriasClinicas');
+    console.log(pdf);
+    console.log("ACA FALLA!!!???");
+
   }
 
   async user() {

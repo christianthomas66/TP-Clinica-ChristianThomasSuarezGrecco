@@ -254,7 +254,7 @@ export default class RegistroespecialistaComponent {
         title: 'Registro exitoso',
         text: '¡Bienvenido!',
         showConfirmButton: false,
-        timer: 1500,
+        timer: 3000,
       });
       this.ruta.navigate(['/login']);
     } catch (error: any) {

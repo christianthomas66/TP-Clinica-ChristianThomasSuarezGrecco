@@ -49,6 +49,7 @@ export default class UsuariosPacientesComponent {
     this.turno = turno;
   }
 
+
   descargarHistoriasClinicas(Turnos: Turno[]) {
     // Convertir cada historia clínica en un objeto que se pueda convertir a Excel
     const historiasClinicasArray = Turnos.map((turno) => {
@@ -56,7 +57,6 @@ export default class UsuariosPacientesComponent {
       let historiaClinicaCopia: Partial<Turno> = {
         ...turno,
       };
-
       // Eliminar los campos que no quieres incluir
 
       // Desglosar el objeto datosDinamicos en propiedades individuales

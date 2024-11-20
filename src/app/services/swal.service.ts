@@ -10,13 +10,13 @@ export class SwalService {
   constructor(public ruta: Router) { }
 
   mostrarMensajeExitosoYNavegar(ruta: string[]) {
-    // Swal.fire({
-    //   icon: 'success',
-    //   title: 'Sesión iniciada exitosa',
-    //   text: '¡Bienvenido!',
-    //   showConfirmButton: false,
-    //   timer: 1000,
-    // });
+    Swal.fire({
+      icon: 'success',
+      title: 'Sesión iniciada exitosa',
+      text: '¡Bienvenido!',
+      showConfirmButton: false,
+      timer: 3000,
+    });
     this.ruta.navigate(ruta);
   }
 

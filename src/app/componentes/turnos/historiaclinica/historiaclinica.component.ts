@@ -77,7 +77,7 @@ export class HistoriaclinicaComponent  {
 
       const datosDinamicosObj = {
         rango: this.form.get('datosDinamicos.rango')?.value,
-        numerico: this.form.get('datosDinamicos.numerico')?.value,
+        numerico: this.form.get('datosDinamicos.nombreNumerico')?.value,
         switch: this.form.get('datosDinamicos.switch')?.value,
       };
 
