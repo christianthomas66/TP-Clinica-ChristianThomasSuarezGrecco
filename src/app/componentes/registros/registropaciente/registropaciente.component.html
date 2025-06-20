@@ -5,12 +5,12 @@
         <div class="card bg-dark text-white" style="border-radius: 1rem;">
           <div class="card-body p-5">
             <form (ngSubmit)="onSubmit()" [formGroup]="formulario" class="needs-validation">
-              <h2 class="fw-bold mb-4 text-uppercase text-center">REGISTRAR PACIENTE</h2>
+              <h2 class="fw-bold mb-4 text-uppercase text-center">{{ 'registroPacientes.titulo' | translate}}</h2>
 
-              <div class="row">
+              <div class="row"> 
                 <div class="col-md-6 mb-4">
                   <div class="form-outline form-white">
-                    <input formControlName="pacienteNombre" type="text" class="form-control form-control-lg" id="pacienteNombre" />
+                    <input formControlName="pacienteNombre" type="text" class="form-control form-control-lg" id="pacienteNombre"  />
                     <label class="form-label" for="pacienteNombre">Nombre del paciente</label>
                     <div *ngIf="formulario.controls['pacienteNombre'].errors && formulario.controls['pacienteNombre'].touched">
                       <span style="color: red;">Debe ingresar el nombre del paciente.</span>
@@ -119,13 +119,14 @@
                 </div>
               </div>
 
-              <div class="text-center mb-4" *ngIf="captchaHabilitado">
+              <app-captcha (corrected)="onCaptchaResolved($event)" />
+              <!-- <div class="text-center mb-4" *ngIf="captchaHabilitado">
                 <button type="button" appCustomCaptcha (captchaResolved)="onCaptchaResolved($event)">
                   <img *ngIf="!captchaResuelto" src="assets/img/captchaPropio.png" alt="Cuadrado" style="width: 20px; height: 20px;">
                   <img *ngIf="captchaResuelto" src="assets/img/captchaResuelto.png" alt="Checkmark" style="width: 20px; height: 20px;">
                   {{ captchaResuelto ? 'Captcha resuelto' : 'Resolver Captcha' }}
                 </button>
-              </div>
+              </div> -->
 
               <div class="text-center">
                 <button class="btn btn-outline-light btn-lg px-5" type="submit" [disabled]="captchaHabilitado && !captchaResuelto">
@@ -134,12 +135,12 @@
               </div>
               <hr>
 
-              <div class="text-center">
+              <!-- <div class="text-center">
                 <button type="button" class="btn-toggle-captcha" (click)="toggleCaptcha()"
                         [ngClass]="{'enabled': captchaHabilitado, 'disabled': !captchaHabilitado}">
                   {{ captchaHabilitado ? 'Deshabilitar Captcha' : 'Habilitar Captcha' }}
                 </button>
-              </div>
+              </div> -->
             </form>
           </div>
         </div>

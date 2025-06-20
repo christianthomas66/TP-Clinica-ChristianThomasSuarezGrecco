@@ -10,12 +10,38 @@ import { provideHttpClient } from '@angular/common/http';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateModule, TranslateLoader, provideTranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(),
     RecaptchaModule,
     provideRouter(routes),
+    provideTranslateService({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      }
+    }),
+    // TranslateModule.forRoot().providers,
+    // importProvidersFrom(
+    //   TranslateModule.forRoot({
+    //     loader: {
+    //       provide: TranslateLoader,
+    //       useFactory: HttpLoaderFactory,
+    //       deps: [HttpClient],
+    //     },
+    //   })
+    // ),
+    // provideTranslateLoader(HttpLoaderFactory),
+    // TranslateService,
     /*
     provideFirebaseApp(() => initializeApp({
       apiKey: "AIzaSyBwCGCWWdm3Hv1gWYit9LhfGgFheRRYO6g",

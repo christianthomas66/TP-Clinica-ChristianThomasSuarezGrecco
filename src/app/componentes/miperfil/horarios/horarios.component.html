@@ -1,0 +1,83 @@
+<div class="d-flex">
+	<div ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills flex-column" orientation="vertical">
+    @for (especialidad of especialidades; track $index) {
+      <ng-container ngbNavItem="top">
+        <button ngbNavLink (click)="onChangeSpecialty(especialidad.nombre)">{{ especialidad.nombre }}</button>
+
+        <ng-template ngbNavContent>
+          <div class="horario-container">
+            @for (horario of especialidad.horarios; track $index) {
+              <div class="horario-wrapper">
+                @switch (horario.diaSemana) {
+                  @case (1) {
+                    <p class="dia">Lunes</p>
+                  }
+                  @case (2) {
+                    <p class="dia">Martes</p>
+                  }
+                  @case (3) {
+                    <p class="dia">Miercoles</p>                
+                  }
+                  @case (4) {
+                    <p class="dia">Jueves</p>
+                  }
+                  @case (5) {
+                    <p class="dia">Viernes</p>
+                  }
+                  @case (6) {
+                    <p class="dia">Sabado</p>
+                  }
+                  @case (0) {
+                    <p class="dia">Domingo</p>
+                  }
+                }
+    
+                @if (!horario.estaActivo) {
+                  <p>No disponible</p>
+                } @else {
+                  <div class="horas">
+                    <input type="time" class="input-time" [value]="horario.fechaInicio.toDate() | date:'HH:mm'" (change)="onChangeTime($event, horario.diaSemana, 'inicio')">
+                    <input type="time" class="input-time" [value]="horario.fechaFinal.toDate() | date:'HH:mm'" (change)="onChangeTime($event, horario.diaSemana, 'final')">
+                    <!-- <div class="input-time">{{ horario.fechaInicio.toDate() | date:'HH:mm' }}</div>
+                    <div class="input-time">{{ horario.fechaFinal.toDate() | date:'HH:mm' }}</div> -->
+                  </div>
+                  <!-- <input type="time" class="bg-input p-2 rounded-sm text-white border-0 outline-0 focus-visible:outline-1 focus-visible:outline-primary" [value]="horario.fechaFinal.toDate() | date:'HH:mm'"> -->
+                }
+              </div>
+            }
+          </div>
+            
+        </ng-template>
+      </ng-container>
+    }
+		<!-- <ng-container ngbNavItem="middle">
+			<button ngbNavLink>Middle</button>
+			<ng-template ngbNavContent>
+				<p>
+					Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
+					farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
+					ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
+					helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson
+					8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
+					stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
+				</p>
+			</ng-template>
+		</ng-container>
+		<ng-container ngbNavItem="bottom">
+			<button ngbNavLink>Bottom</button>
+			<ng-template ngbNavContent>
+				<p>
+					Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam. Nulla
+					facilisi. Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu,
+					congue et odio. Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices
+					et. Sed diam urna, egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus
+					faucibus nisl enim, nec tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci
+					varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem
+					aliquet ultricies in eget neque. Phasellus nec tortor vel tellus pulvinar feugiat.
+				</p>
+			</ng-template>
+		</ng-container> -->
+	</div>
+
+	<div [ngbNavOutlet]="nav" class="ms-4"></div>
+</div>

@@ -13,11 +13,12 @@ import { Especialista } from '../../../clases/especialista';
 import { AuthService } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
 import { CustomCaptchaDirective } from '../../../customCaptchaDirective';
+import { CaptchaDirectivaComponent } from '../../captcha-directiva/captcha-directiva.component';
 
 @Component({
   selector: 'app-registroespecialista',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, CustomCaptchaDirective],
+  imports: [CommonModule, ReactiveFormsModule, CustomCaptchaDirective, CaptchaDirectivaComponent],
   templateUrl: './registroespecialista.component.html',
   styleUrl: './registroespecialista.component.css',
 })
@@ -278,6 +279,16 @@ export default class RegistroespecialistaComponent {
 
   onCaptchaResolved(resolved: boolean) {
     this.captchaResuelto = resolved;
+
+    if (resolved) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Captcha Correcto',
+        text: 'El captcha fue solucionado correctamente',
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
   }
 
   toggleCaptcha() {

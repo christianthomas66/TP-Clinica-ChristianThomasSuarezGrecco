@@ -108,6 +108,8 @@ export default class GraficosComponent implements OnInit {
           };
 
           createPdf(docDefinition).download('grafico');
+          console.log("")
+          console.log(createPdf);
         }
       }
     }
@@ -358,6 +360,4 @@ export default class GraficosComponent implements OnInit {
       color: ['#0d6efd'], // Cambia esto al color que desees
     };
   }
-
-
 }

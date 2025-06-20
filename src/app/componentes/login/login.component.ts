@@ -7,11 +7,12 @@ import { SwalService } from '../../services/swal.service';
 import { FormBuilder, FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { BarranavinicialComponent } from '../barranavinicial/barranavinicial.component';
 import { slideInFromBottomAnimation, fadeScaleAnimation } from '../../animacion';
+import {TranslatePipe, TranslateDirective, TranslateService, TranslateModule} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterOutlet, BarranavinicialComponent],
+  imports: [ReactiveFormsModule, CommonModule, RouterOutlet, BarranavinicialComponent, TranslateModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   animations: [slideInFromBottomAnimation, fadeScaleAnimation]
@@ -30,8 +31,8 @@ export default class LoginComponent implements OnInit {
     { email: 'jaffiddaujixu-2835@yopmail.com', password: '123456', tipo: 'Paciente Joana', imagen: 'assets/img/pac1.jpg' },
     { email: 'crihadelludda-9566@yopmail.com', password: '123456', tipo: 'Paciente Carlos', imagen: 'assets/img/pac2.jpg' },
     { email: 'gregrakequetto-5258@yopmail.com', password: '123456', tipo: 'Paciente Eugenio', imagen: 'assets/img/pac3.jpg' },
-    { email: 'savoissisifra-7468@yopmail.com', password: '123456', tipo: 'Especialista Melisa', imagen: 'assets/img/esp1.jpg' },
-    { email: 'hugifoquicro-8345@yopmail.com', password: '123456', tipo: 'Especialista Miguel', imagen: 'assets/img/esp2.jpg' },
+    { email: 'prouxoinauxiho-7374@yopmail.com', password: '123456', tipo: 'Especialista Melisa', imagen: 'assets/img/esp1.jpg' },
+    { email: 'grousuruhade-3124@yopmail.com', password: '123456', tipo: 'Especialista Miguel', imagen: 'assets/img/esp2.jpg' },
     { email: 'christian022198@gmail.com', password: '1234567', tipo: 'Administrador Christian Thomas', imagen: 'assets/img/thomyadmin.jpg' }
   ];
 
@@ -40,7 +41,11 @@ export default class LoginComponent implements OnInit {
     public ruta: Router,
     public inicializador: FormBuilder,
     private mensajesEmergentes: SwalService,
+    translate: TranslateService
   ) {
+    translate.setDefaultLang('es');
+    translate.use('en');
+
     this.formulario = this.inicializador.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]

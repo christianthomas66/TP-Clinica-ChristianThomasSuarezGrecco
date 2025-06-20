@@ -1,0 +1,33 @@
+.horario-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.horario-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.horas {
+    display: flex;
+    align-items: center;
+}
+
+p {
+    margin: 0;
+}
+
+.input-time {
+    display: block;
+    width: 110px;
+    padding: 0 12px;
+    background-color: #353535;
+    color: white;
+}
+
+.dia {
+    width: 100px;
+    padding: 0 12px;
+}

@@ -21,6 +21,10 @@ export const routes: Routes = [
      loadComponent: () => import("./componentes/registros/eleccionregistro/eleccionregistro.component")
     },
     {
+     path: "estados-fav-button",
+     loadComponent: () => import("./componentes/estados-fav-button/estados-fav-button.component").then(m => m.EstadosFavButtonComponent)
+    },
+    {
       path: 'homeAdmin',
       loadChildren: () => import('./componentes/usuarios/usuarios.routes')
     },

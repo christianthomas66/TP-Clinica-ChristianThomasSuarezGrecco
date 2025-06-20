@@ -7,6 +7,9 @@ import { AuthService } from '../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomCaptchaDirective } from '../../../customCaptchaDirective';
+import { CaptchaDirectivaComponent } from '../../captcha-directiva/captcha-directiva.component';
+import {TranslatePipe, TranslateDirective, TranslateService, TranslateModule} from "@ngx-translate/core";
+
 
 @Component({
   selector: 'app-registropaciente',
@@ -15,7 +18,9 @@ import { CustomCaptchaDirective } from '../../../customCaptchaDirective';
     CommonModule,
     ReactiveFormsModule,
     CustomCaptchaDirective,
-    RouterOutlet
+    RouterOutlet,
+    CaptchaDirectivaComponent,
+    TranslateModule
   ],
   templateUrl: './registropaciente.component.html',
   styleUrl: './registropaciente.component.css',
@@ -34,7 +39,11 @@ export default class RegistropacienteComponent {
   captchaResuelto: boolean = false; // Variable para controlar el captcha
   captchaHabilitado: boolean = true; // Variable para habilitar o deshabilitar el captcha
 
-  constructor(private autenticacion: AuthService, private router: Router) {}
+  constructor(private autenticacion: AuthService, private router: Router, translate: TranslateService) {
+
+    translate.setDefaultLang('es');
+    translate.use('en');
+  }
 
   ngOnInit(): void {
     this.formulario = new FormGroup({
@@ -117,6 +126,8 @@ export default class RegistropacienteComponent {
         password: this.formulario.controls['pacienteClave'].value,
         nick: this.formulario.controls['pacienteNombre'].value,
       };
+      console.log("Componente Registro Paciente");
+      console.log(data);
       this.user = await this.autenticacion.registrar(data);
 
       let usuario = new Paciente(
@@ -159,6 +170,16 @@ export default class RegistropacienteComponent {
 
   onCaptchaResolved(resolved: boolean) {
     this.captchaResuelto = resolved;
+
+    if (resolved) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Captcha Correcto',
+        text: 'El captcha fue solucionado correctamente',
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
   }
 
   toggleCaptcha() {

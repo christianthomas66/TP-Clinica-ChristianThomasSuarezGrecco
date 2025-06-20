@@ -1,0 +1,181 @@
+{
+    "bienvenida": {
+        "registrarse": "Sign Up",
+        "iniciarSesion": "Log In",
+        "title1": "Welcome to the Health Center Clinic",
+        "parrafo1": "At our clinic, we are committed to your health and well-being. We have a team of highly qualified professionals and cutting-edge technology to provide you with the best medical care in a warm and safe environment.",
+        "parrafo2": "We offer a wide variety of medical specialties and comprehensive services to care for you and your family at every stage of life. From routine check-ups to advanced treatments, our mission is to provide personalized and effective solutions for your health.",
+        "sobreNosotros": {
+            "titulo": "About Us",
+            "card1Titulo": "Safety",
+            "card1Descripcion": "We have the best specialists graduated from top universities.",
+            "card2Titulo": "Control Panel",
+            "card2Descripcion": "We provide a dashboard for specialists to monitor their patients.",
+            "card3Titulo": "Professionalism",
+            "card3Descripcion": "We excel in medical excellence, offering services supported by advanced technology."
+        }
+    },
+    
+    
+    "login": {
+        "title": "Login",
+        "description": "Please enter your email and password.",
+        "formOne": "Email",
+        "formTwo": "Password"
+    },
+
+    "accesoRapido":{
+        "accesoRapidoBoton": "Quick access: ",
+        "pacienteJoana": "Patient joana",
+        "pacienteCarlos": "patient Carlos",
+        "pacienteEugenio": "patient Eugenio",
+        "especialistaMelisa": "Specialist Melisa",
+        "especialistaMiguel": "Specialist Miguel",
+        "administradorChristian": "Administrator Christian Thomas"
+    },
+    "estadosFavButton": {
+        "titulo": "Specialists Pending Approval",
+        "cargando": "Loading",
+        "titulo2": "Approved Specialists",
+        "titulo3": "Rejected Specialists",
+        "especialidades": "Specialties",
+        "especialistasAceptado": "Approved Specialist",
+        "especialistasRechazado": "Rejected Specialist",
+        "especialistasPendiente": "Specialist Pending Approval",
+        "edad": "Age",
+        "dni": "DNI",
+        "aceptar": "Accept",
+        "rechazar": "Reject"
+    },
+
+
+    "menu": {
+        "miPerfil": "My profile",
+        "turnosSolicitados": "Shifts requested",
+        "solicitarTurno": "Solicitar turno",
+        "cerrarSesion": "Logout",
+        "usuario": "User"
+    },
+    "barraNavInicial": {
+        "iniciarSesion": "Sign in",
+        "registrarse": "Register",
+        "inicio": "Home"
+    },
+    "especialistasNavbar": {
+        "turnosAsignados": "Assigned shifts ",
+        "miPerfil": "My profile",
+        "pacientes": "Patients",
+        "cerrarSesion": "Logout",
+        "usuario": "User"
+    },
+    "adminNavbar": {
+        "agregarAdministradores": "Add Administrators",
+        "usuarios": "Users",
+        "turnos": "Appointments",
+        "solicitarTurno": "Request Appointment",
+        "solicitudesEspecialistas": "Specialist Requests",
+        "miPerfil": "My Profile",
+        "historialPacientes": "Patient Medical History",
+        "graficos": "Charts",
+        "usuarioConectado": "Connected User",
+        "cerrarSesion": "Log Out"
+    },
+
+    "registroPacientes":{
+        "titulo": "register patient",
+        "nombre": "name",
+        "apellido": "last name",
+        "edadDelPaciente": "patient age",
+        "Dni del paciente": "patient ID",
+        "Correo electronico": "Email",
+        "Contraseña": "password",
+        "Obra social del paciente":"Patient's Social Work",
+        "1° Foto del paciente": "1st photo of the patient",
+        "2° Foto del paciente": "2nd photo of the patient"
+    },
+    "registroEspecialistas":{
+        "nombre del especialista": "Specialist name",
+        "apellido del especialista": "Specialist's last name",
+        "edad del especialista": "Specialist age",
+        "DNI del especialista": "Specialist ID",
+        "Correo electrónico": "Email",
+        "Contraseña": "Password",
+
+        "especialidades": {
+            "Especialidades Médicas": "Medical Specialties",
+            "Clínica Médica": "Internal Medicine",
+            "Pediatría": "Pediatrics",
+            "Ginecología y Obstetricia": "Gynecology and Obstetrics",
+            "Cardiología": "Cardiology",
+            "Neurología": "Neurology",
+            "Dermatología": "Dermatology",
+            "Traumatología y Ortopedia": "Traumatology and Orthopedics",
+            "Gastroenterología": "Gastroenterology",
+            "Nefrología": "Nephrology",
+            "Endocrinología": "Endocrinology",
+            "Reumatología": "Rheumatology",
+            "Hematología": "Hematology",
+            "Neumonología": "Pulmonology",
+            "Alergología e Inmunología Clínica": "Allergology and Clinical Immunology",
+            "Infectología": "Infectious Diseases",
+            "Oncología": "Oncology",
+            "Oftalmología": "Ophthalmology",
+            "Otorrinolaringología": "Otolaryngology",
+            "Psiquiatría": "Psychiatry",
+            "Urología": "Urology",
+            
+            "Cirugía General": "General Surgery",
+            "Cirugía Plástica y Reparadora": "Plastic and Reconstructive Surgery",
+            "Cirugía Cardiovascular": "Cardiovascular Surgery",
+            "Neurocirugía": "Neurosurgery",
+            "Cirugía Pediátrica": "Pediatric Surgery",
+            "Cirugía Vascular": "Vascular Surgery",
+            "Traumatología y Cirugía Ortopédica": "Traumatology and Orthopedic Surgery",
+            
+            "Imágenes y Radiología": "Imaging and Radiology",
+            "Medicina Nuclear": "Nuclear Medicine",
+            "Laboratorio Clínico": "Clinical Laboratory",
+            "Endoscopía Digestiva": "Digestive Endoscopy",
+            "Terapia Intensiva": "Intensive Care",
+            "Terapia Intermedia": "Intermediate Care",
+            "Medicina de Rehabilitación y Fisiatría": "Rehabilitation Medicine and Physiatry",
+            
+            "Odontología General": "General Dentistry",
+            "Ortodoncia": "Orthodontics",
+            "Endodoncia": "Endodontics",
+            "Periodoncia": "Periodontics",
+            "Implantología": "Implantology",
+            "Cirugía Maxilofacial": "Maxillofacial Surgery",
+            
+            "Psicología Clínica": "Clinical Psychology",
+            "Psicopedagogía": "Psychoeducation",
+            "Terapia Ocupacional": "Occupational Therapy",
+            
+            "Nutrición y Dietética": "Nutrition and Dietetics",
+            "Medicina del Deporte": "Sports Medicine",
+            "Medicina Familiar y General": "Family and General Medicine",
+            "Medicina Laboral": "Occupational Medicine",
+            "Inmunizaciones y Vacunación": "Immunizations and Vaccination",
+            
+            "Fonoaudiología": "Speech Therapy",
+            "Kinesiología y Fisioterapia": "Kinesiology and Physiotherapy",
+            "Podología": "Podiatry",
+            
+            "Medicina Genómica": "Genomic Medicine",
+            "Telemedicina": "Telemedicine",
+            "Cuidados Paliativos": "Palliative Care",
+            "Sexología Clínica": "Clinical Sexology",
+
+            "botonAgregar":{
+                "Agregar": "Add"
+            }
+        }
+        
+        
+
+
+    }
+    
+    
+}
+

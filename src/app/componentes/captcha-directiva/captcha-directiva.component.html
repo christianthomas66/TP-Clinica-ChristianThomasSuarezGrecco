@@ -1,0 +1,16 @@
+<div class="captcha-container">
+    <label for="captcha">Custom Captcha <span class="required">*</span></label>
+    <div class="captcha-question">
+      <span>{{ question }}</span>
+      <input
+        type="text"
+        id="captcha"
+        [ngModel]="userInput"
+        (ngModelChange)="validateCaptcha($event)"
+        [class.valid]="isCorrect"
+        [class.invalid]="!isCorrect && userInput !== ''"
+      />
+    </div>
+    <small class="captcha-hint">Please answer the question above to proceed.</small>
+    <button type="button" [disabled]="!isCorrect" (click)="onSubmit()">Submit</button>
+  </div>

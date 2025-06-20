@@ -48,6 +48,10 @@ export class AuthService {
 
   async registrar({ email, password, nick }: any) {
     try {
+      console.log("Servicio Auth");
+      console.log(email);
+      console.log(password);
+      console.log(nick);
       const credencialesUsuario = await createUserWithEmailAndPassword(
         this.auth,
         email,

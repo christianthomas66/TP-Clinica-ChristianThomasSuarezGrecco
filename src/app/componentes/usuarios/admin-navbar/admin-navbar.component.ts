@@ -3,16 +3,23 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from './../../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../../../services/language.service';
 
 @Component({
   selector: 'app-admin-navbar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './admin-navbar.component.html',
   styleUrl: './admin-navbar.component.css'
 })
 export class AdminNavbarComponent{
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private _languageService: LanguageService, private translate: TranslateService) {}
+
+  onChangeLanguage(language: string) {
+    this._languageService.changeLanguage(language);
+  }
 
   usuarioConectado = this.authService.obtenerUsuarioConectado();
   nombreUsuario: string | null = null; // Cambia el tipo de nombreUsuario

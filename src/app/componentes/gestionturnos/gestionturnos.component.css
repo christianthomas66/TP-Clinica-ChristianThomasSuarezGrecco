@@ -13,6 +13,41 @@
   transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
 }
 
+.opcion {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+}
+
+.opcion img {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+}
+
+.boton-doctor {
+  background: transparent;
+  border: 0;
+  outline: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.boton-doctor span {
+  font-size: 20px;
+  color: white;
+}
+
+.boton-doctor img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50px;
+  object-fit: cover;
+}
+
 .btn-profesional:hover {
   background-color: #212529; /* Cambio de color de fondo al pasar el mouse */
   border-color: #212529; /* Cambio de color de borde al pasar el mouse */

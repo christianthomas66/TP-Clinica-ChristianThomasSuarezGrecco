@@ -1,0 +1,71 @@
+{
+    "bienvenida": {
+        "registrarse":"Registrarse",
+        "iniciarSesion":"Iniciar sesion",
+        "title1": "Bienvenido a la clínica al centro de salud",
+        "parrafo1": "En nuestra clínica, estamos comprometidos con su salud y bienestar. Contamos con un equipo de profesionales altamente calificados y tecnología de vanguardia para ofrecerle la mejor atención médica en un ambiente cálido y seguro.",
+        "parrafo2": "Ofrecemos una amplia variedad de especialidades médicas y servicios integrales para cuidar de usted y su familia en cada etapa de la vida. Desde consultas de rutina hasta tratamientos avanzados, nuestra misión es brindar soluciones personalizadas y efectivas para su salud.", 
+        "sobreNosotros":{
+            "titulo": "Sobre nosotros",
+            "card1Titulo":"Seguridad",
+            "card1Descripcion":"Contamos con los mejores especialistas graduados de las mejores universidades",
+
+            "card2Titulo":"Panel de control",
+            "card2Descripcion":"Tenemos un dashboard para que lo especialistas puedan hacer un seguimiento de sus pacientes",
+
+            "card3Titulo":"Profesionalismo",
+            "card3Descripcion":"Destacamos en la excelencia médica, ofreciendo servicios respaldados por tecnología."
+        }
+    },
+    "login": {
+        "title": "Iniciar sesion",
+        "description": "Por favor ingrese su correo y contraseña",
+        "formOne": "Correo electronico",
+        "formTwo": "Contraseña"
+    },
+    "menu": {
+        "miPerfil": "Mi perfil",
+        "turnosSolicitados": "Turnos solicitados",
+        "solicitarTurno": "Solicitar turno",
+        "cerrarSesion": "Cerrar sesion",
+        "usuario": "Usuario"
+    },
+    "barraNavInicial": {
+        "iniciarSesion": "Iniciar sesion",
+        "registrarse": "Registrarse",
+        "inicio": "Inicio"
+    },
+    "especialistasNavbar": {
+        "turnosAsignados": "Turnos asignados",
+        "miPerfil": "Mi perfil",
+        "pacientes": "Pacientes",
+        "cerrarSesion": "Cerrar sesion",
+        "usuario": "Usuario"
+    },
+    "adminNavbar": {
+        "agregarAdministradores": "Agregar Administradores",
+        "usuarios": "Usuarios",
+        "turnos": "Turnos",
+        "solicitarTurno": "Solicitar Turno",
+        "solicitudesEspecialistas": "Solicitudes de Especialistas",
+        "miPerfil": "Mi Perfil",
+        "historialPacientes": "Historial Clínico de Pacientes",
+        "graficos": "Gráficos",
+        "usuarioConectado": "Usuario Conectado",
+        "cerrarSesion": "Cerrar Sesión"
+    },
+    "estadosFavButton": {
+        "titulo": "Especialistas Pendientes de Aprobación",
+        "cargando": "Cargando",
+        "titulo2": "Especialistas Aprobados",
+        "titulo3": "Especialistas Rechazados",
+        "especialidades": "Especialidades",
+        "especialistasAceptado": "Especialista Aceptado",
+        "especialistasRechazado": "Especialista Rechazado",
+        "especialistasPendiente": "Especialista Pendiente de Aprobación",
+        "edad": "Edad",
+        "dni": "DNI",
+        "aceptar": "Aceptar",
+        "rechazar": "Rechazar"
+    }
+}

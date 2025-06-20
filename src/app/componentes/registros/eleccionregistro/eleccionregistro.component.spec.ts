@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EleccionregistroComponent } from './eleccionregistro.component';
+import EleccionregistroComponent from './eleccionregistro.component';
 
 describe('EleccionregistroComponent', () => {
   let component: EleccionregistroComponent;

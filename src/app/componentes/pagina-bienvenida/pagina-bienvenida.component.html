@@ -1,11 +1,25 @@
 <header class="header">
     <div class="logo">
-        <img src="https://media.discordapp.net/attachments/777736725861629982/1308143329590120559/salud_transparente.png?ex=673cdee9&is=673b8d69&hm=124859c92093b59dcc8d04aa66001aa69c0c85b9eb5e4659dc331733e352788a&=&format=webp&quality=lossless&width=343&height=350" alt="">
+        <img src="/assets/img/fotoclinica.jpg" alt="">
     </div>
 
     <div class="header-right">
-        <a routerLink="/eleccionregistro" class="button button-ghost">Registrarse</a>
-        <a routerLink="/login" class="button">Iniciar sesion</a>
+        <div class="button-language">
+            <button type="button" class="language-btn" (click)="onChangeLanguage('en')">
+              <img src="assets/img/en-US.png" alt="">
+            </button>
+        
+            <button type="button" class="language-btn" (click)="onChangeLanguage('es')">
+              <img src="assets/img/es-ES.png" alt="">
+            </button>
+        
+            <button type="button" class="language-btn" (click)="onChangeLanguage('pt')">
+              <img src="assets/img/pt-BR.png" alt="">
+            </button>
+        </div>
+
+        <a routerLink="/eleccionregistro" class="button button-ghost">{{ 'bienvenida.registrarse' | translate }}</a>
+        <a routerLink="/login" class="button">{{ 'bienvenida.iniciarSesion' | translate }}</a>
     </div>
 </header>
 
@@ -15,45 +29,46 @@
     <div class="box">
         <div>
             <h1 class="title">
-                Bienvenido a la clínica al centro de salud <br>
+                {{ 'bienvenida.title1' | translate }}
+                <br>
                 <span class="title_super">Christian Thomás Suarez Grecco</span>
             </h1>
             <p class="paragraph">
-                En nuestra clínica, estamos comprometidos con su salud y bienestar. Contamos con un equipo de profesionales altamente calificados y tecnología de vanguardia para ofrecerle la mejor atención médica en un ambiente cálido y seguro.
+                {{ 'bienvenida.parrafo1' | translate }}
                 <br>
                 <br>
-                Ofrecemos una amplia variedad de especialidades médicas y servicios integrales para cuidar de usted y su familia en cada etapa de la vida. Desde consultas de rutina hasta tratamientos avanzados, nuestra misión es brindar soluciones personalizadas y efectivas para su salud.
+                {{ 'bienvenida.parrafo2' | translate }}
             </p>
         </div>
 
-        <img src="https://media.discordapp.net/attachments/777736725861629982/1307936958282207253/cruz_transparente.png?ex=673cc777&is=673b75f7&hm=b1526a36c109a34f43f10835d5bbdcf2a53bb2572d317dd5e0cf4fb4b052ea6d&=&format=webp&quality=lossless" alt="">
+        <img src="/assets/img/cruz_transparente.png" alt="">
     </div>
 </section>
 <main class="main">
-    <h2 id="about">Sobre nosotros</h2>
+    <h2 id="about">{{ 'bienvenida.sobreNosotros.titulo' | translate }}</h2>
 
     <div class="cards">
         <article class="card">
-            <img src="https://media.discordapp.net/attachments/777736725861629982/1307939004599107665/ed42af8a-037d-4a55-b2dd-c62e50be8f6f.jpg?ex=673cc95f&is=673b77df&hm=b027ee42076bbcae1103cf44874ebf2ae4706ee048aaa404c327e6ba9105e2ca&=&format=webp&width=930&height=623" alt="" class="card-image">
+            <img src="/assets/img/form1.jpg" alt="" class="card-image">
             <div class="body">
-                <h3>Seguridad</h3>
-                <p>Contamos con los mejores especialistas graduados de las mejores universidades</p>
+                <h3>{{ 'bienvenida.sobreNosotros.card1Titulo' | translate }}</h3>
+                <p>{{ 'bienvenida.sobreNosotros.card1Descripcion' | translate }}</p>
             </div>
         </article>
 
         <article class="card">
-            <img src="https://media.discordapp.net/attachments/777736725861629982/1307939079668895745/137cdf8f-da60-470a-a782-3361784ef10f.jpg?ex=673cc970&is=673b77f0&hm=a836b33479ee610ac60d92fa82426e4cc426fd0a44404b41a992670c683e8163&=&format=webp&width=941&height=623" alt="" class="card-image">
+            <img src="/assets/img/form2.jpg" alt="" class="card-image">
             <div class="body">
-                <h3>Panel de control</h3>
-                <p>Tenemos un dashboard para que lo especialistas puedan hacer un seguimiento de sus pacientes</p>
+                <h3>{{ 'bienvenida.sobreNosotros.card2Titulo' | translate }}</h3>
+                <p>{{ 'bienvenida.sobreNosotros.card2Descripcion' | translate }}</p>
             </div>
         </article>
 
         <article class="card">
-            <img src="https://media.discordapp.net/attachments/777736725861629982/1307939138095546429/54f7c537-c2f7-44fb-80b7-319bad18db45.jpg?ex=673cc97e&is=673b77fe&hm=4b74146cb59df48185da89d082d6c490b92b667b944602019d58252beb87358f&=&format=webp&width=931&height=623" alt="" class="card-image">
+            <img src="/assets/img/form3.jpg" alt="" class="card-image">
             <div class="body">
-                <h3>Profesionalismo</h3>
-                <p>Destacamos en la excelencia médica, ofreciendo servicios respaldados por tecnología.</p>
+                <h3>{{ 'bienvenida.sobreNosotros.card3Titulo' | translate }}</h3>
+                <p>{{ 'bienvenida.sobreNosotros.card3Descripcion' | translate }}</p>
             </div>
         </article>
     </div>

@@ -10,43 +10,61 @@
   >
     <span class="navbar-toggler-icon"></span>
   </button>
+
+  <div class="button-language">
+    <button type="button" class="language-btn" (click)="onChangeLanguage('en')">
+      <img src="assets/img/en-US.png" alt="">
+    </button>
+
+    <button type="button" class="language-btn" (click)="onChangeLanguage('es')">
+      <img src="assets/img/es-ES.png" alt="">
+    </button>
+
+    <button type="button" class="language-btn" (click)="onChangeLanguage('pt')">
+      <img src="assets/img/pt-BR.png" alt="">
+    </button>
+  </div>
+
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link active" href="/homeAdmin/admin/registrarAdministrador">Agregar Administradores</a>
+        <a class="nav-link active" href="/homeAdmin/admin/registrarAdministrador">{{ 'adminNavbar.agregarAdministradores' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="/homeAdmin/admin/gestionEspecialistas">Usuarios</a>
+        <a class="nav-link active" href="/homeAdmin/admin/gestionEspecialistas">{{ 'adminNavbar.usuarios' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="/homeAdmin/admin/seccionturnos">Turnos</a>
+        <a class="nav-link active" href="/homeAdmin/admin/seccionturnos">{{ 'adminNavbar.turnos' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="/homeAdmin/admin/solicitarturnoadm">Solicitar Turno</a>
+        <a class="nav-link active" href="/homeAdmin/admin/solicitarturnoadm">{{ 'adminNavbar.solicitarTurno' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="/homeAdmin/admin/miperfil">Mi Perfil</a>
+        <a class="nav-link active" href="/estados-fav-button">{{ 'adminNavbar.solicitudesEspecialistas' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="/homeAdmin/admin/usuariospacientes">Historial clínico de pacientes</a>
+        <a class="nav-link active" href="/homeAdmin/admin/miperfil">{{ 'adminNavbar.miPerfil' | translate }}</a>
       </li>
-      <!--li class="nav-item">
-        <a class="nav-link active" href="/homeAdmin/admin/graficos">Gráficos</a>
-      </li-->
+      <li class="nav-item">
+        <a class="nav-link active" href="/homeAdmin/admin/usuariospacientes">{{ 'adminNavbar.historialPacientes' | translate }}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="/homeAdmin/admin/graficos">{{ 'adminNavbar.graficos' | translate }}</a>
+      </li>
     </ul>
 
     <!-- Nombre del usuario conectado -->
     <ng-container *ngIf="nombreUsuario">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <span *ngIf="mostrarNombre" class="nav-link">Usuario: {{ nombreUsuario }}</span>
+          <span *ngIf="mostrarNombre" class="nav-link">{{ 'adminNavbar.usuarioConectado' | translate }}: {{ nombreUsuario }}</span>
         </li>
       </ul>
     </ng-container>
 
     <!-- Botón de cerrar sesión -->
     <form *ngIf="usuarioConectado | async as user" class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-danger my-2 my-sm-0" type="button" (click)="logOut()">Cerrar Sesión</button>
+      <button class="btn btn-outline-danger my-2 my-sm-0" type="button" (click)="logOut()">{{ 'adminNavbar.cerrarSesion' | translate }}</button>
     </form>
   </div>
 </nav>

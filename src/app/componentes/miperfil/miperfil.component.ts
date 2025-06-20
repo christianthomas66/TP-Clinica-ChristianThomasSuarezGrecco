@@ -16,6 +16,7 @@ import { fadeScaleAnimation } from './../../animacion';
 
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { HorariosComponent } from './horarios/horarios.component';
 
 (<any>pdfMake).addVirtualFileSystem(pdfFonts);
 
@@ -28,6 +29,9 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
     BarranavComponent,
     EspecialistaNavbarComponent,
     AdminNavbarComponent,
+
+    HorariosComponent,
+
     RouterOutlet,
   ],
   templateUrl: './miperfil.component.html',
@@ -127,6 +131,9 @@ export default class MiPerfilComponent implements OnInit {
   verhistorias() {
     this.createPDF(this.historiasClinicas);
   }
+
+
+  
 
   verhistoriasFiltrada() {
     this.filtrar = !this.filtrar;
@@ -302,6 +309,7 @@ export default class MiPerfilComponent implements OnInit {
 
   async user() {
     let user = localStorage.getItem('logueado');
+    console.log(`El usuario es ${user}`);
     if (user) {
       const especialista = await this.authService.getUserByUidAndType(
         user,
@@ -336,6 +344,8 @@ export default class MiPerfilComponent implements OnInit {
           ),
         };
 
+        console.log("Mi Perfil Component");
+        console.log(this.usuario.turnos);
         this.horario = this.usuario.turnos.reduce(
           (map: any, turno: Horario) => {
             map[turno.especialidad] = turno.turno;

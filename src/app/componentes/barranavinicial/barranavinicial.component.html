@@ -10,16 +10,31 @@
   >
     <span class="navbar-toggler-icon"></span>
   </button>
+
+  <div class="button-language">
+    <button type="button" class="language-btn" (click)="onChangeLanguage('en')">
+      <img src="assets/img/en-US.png" alt="">
+    </button>
+
+    <button type="button" class="language-btn" (click)="onChangeLanguage('es')">
+      <img src="assets/img/es-ES.png" alt="">
+    </button>
+
+    <button type="button" class="language-btn" (click)="onChangeLanguage('pt')">
+      <img src="assets/img/pt-BR.png" alt="">
+    </button>
+  </div>
+
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/login">Iniciar Sesión</a>
+        <a class="nav-link" href="/login">{{ 'barraNavInicial.iniciarSesion' | translate }}</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="/eleccionregistro">Registrarse</a>
+        <a class="nav-link" href="/eleccionregistro">{{ 'barraNavInicial.registrarse' | translate }}</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="/bienvenida">Home</a>
+        <a class="nav-link" href="/bienvenida">{{ 'barraNavInicial.inicio' | translate }}</a>
       </li>
     </ul>
   </div>

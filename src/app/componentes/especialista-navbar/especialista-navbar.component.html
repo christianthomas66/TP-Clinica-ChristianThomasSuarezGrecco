@@ -3,29 +3,43 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
+  <div class="button-language">
+    <button type="button" class="language-btn" (click)="onChangeLanguage('en')">
+      <img src="assets/img/en-US.png" alt="">
+    </button>
+
+    <button type="button" class="language-btn" (click)="onChangeLanguage('es')">
+      <img src="assets/img/es-ES.png" alt="">
+    </button>
+
+    <button type="button" class="language-btn" (click)="onChangeLanguage('pt')">
+      <img src="assets/img/pt-BR.png" alt="">
+    </button>
+  </div>
+
   <div class="collapse navbar-collapse" id="navbarEspecialista">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link active" routerLink="/turnos/opciones">Turnos asignados</a>
+        <a class="nav-link active" routerLink="/turnos/opciones">{{ 'especialistasNavbar.turnosAsignados' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" routerLink="/miperfil">Mi perfil</a>
+        <a class="nav-link active" routerLink="/miperfil">{{ 'especialistasNavbar.miPerfil' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" routerLink="/usuariospacientes">Pacientes</a>
+        <a class="nav-link active" routerLink="/usuariospacientes">{{ 'especialistasNavbar.pacientes' | translate }}</a>
       </li>
     </ul>
 
     <ng-container *ngIf="loggedUser | async as user">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <span class="nav-link">Usuario: {{ user.displayName }}</span>
+          <span class="nav-link">{{ 'especialistasNavbar.usuario' | translate }}: {{ user.displayName }}</span>
         </li>
       </ul>
     </ng-container>
 
     <form *ngIf="loggedUser | async as user" class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-danger my-2 my-sm-0" type="button" (click)="logOut()">Cerrar Sesión</button>
+      <button class="btn btn-outline-danger my-2 my-sm-0" type="button" (click)="logOut()">{{ 'especialistasNavbar.cerrarSesion' | translate }}</button>
     </form>
   </div>
 </nav>

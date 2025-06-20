@@ -16,18 +16,31 @@
     <div class="row g-3">
       <div class="col-sm-6">
         <label for="especialidad" class="form-label">Especialidad:</label>
-        <select
-          class="form-select bg-dark text-white"
+        <div ngbDropdown class="d-inline-block">
+          <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+            Seleccione una especialidad
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button type="button" ngbDropdownItem class="opcion" *ngFor="let especialidad of especialidades" (click)="enCambioEspecialidad(especialidad.uid)">
+              <img src="assets/img/radiologia.jpg" alt="">
+              {{ especialidad.nombre }}
+            </button>
+          </div>
+        </div>
+        <!-- <select
+        class="form-select bg-dark text-white"
           id="especialidad"
           formControlName="especialidad"
           (ngModelChange)="enCambioEspecialidad($event)"
         >
-          <option value="" disabled selected>Seleccione una especialidad</option>
-          <option *ngFor="let especialidad of especialidades" [value]="especialidad.uid">
+        <option value="" disabled selected>Seleccione una especialidad</option>
+        <option *ngFor="let especialidad of especialidades" [value]="especialidad.uid">
+          <div class="opcion">
             {{ especialidad.nombre }}
+          </option>div>
           </option>
-        </select>
-        <div *ngIf="formulario.controls['especialidad'].errors != null">
+        </select> -->
+        <!-- <div *ngIf="formulario.controls['especialidad'].errors != null">
           <small
             class="invalid text-danger"
             *ngIf="
@@ -37,7 +50,7 @@
           >
             Debe seleccionar una especialidad.
           </small>
-        </div>
+        </div> -->
       </div>
       <div *ngIf="cargando" class="text-center">
         <div class="spinner-grow text-secondary" role="status">
@@ -52,21 +65,21 @@
           <div class="row">
             <div *ngFor="let especialista of especialistasFiltrados" class="col-sm-3 m-1">
               <button
-                class="btn btn-dark text-white"
+              class="boton-doctor"
                 type="button"
                 id="{{ especialista.uid }}"
                 (click)="enCambioEspecialista(especialista.uid)"
               >
                 <span>{{ especialista.nombre }} {{ especialista.apellido }}</span>
+
                 <img
                   [src]="especialista.foto1"
                   alt="Imagen de {{ especialista.nombre }}"
-                  class="img-fluid especialidad-img mb-2"
                 />
-                <div>
+                <!-- <div>
                   <p>Edad: {{ especialista.edad }}</p>
                   <p>DNI: {{ especialista.dni }}</p>
-                </div>
+                </div> -->
               </button>
             </div>
           </div>

@@ -13,12 +13,13 @@
 
   <form (ngSubmit)="onSubmit()" [formGroup]="formulario" class="form bg-dark">
     <div class="mb-md-5 mt-md-4 pb-5">
-      <h2 class="fw-bold mb-2 text-uppercase">Iniciar Sesión</h2>
-      <p class="text-white-50 mb-5">Por favor ingrese su correo y contraseña</p>
+      <h2 class="fw-bold mb-2 text-uppercase">{{ 'login.title' | translate }}</h2>
+      <!-- <h2 class="fw-bold mb-2 text-uppercase">{{ 'login.title' | translate }}</h2> -->
+      <p class="text-white-50 mb-5">{{ 'login.description' | translate }}</p>
 
       <div class="form-outline form-white mb-4">
         <input type="email" class="form-control form-control-lg" id="email" placeholder="name@example.com" formControlName="email" />
-        <label class="form-label" for="email">Email</label>
+        <label class="form-label" for="email">{{ 'login.formOne' | translate }}</label>
         <div *ngIf="formulario.controls['email'].touched && formulario.controls['email'].invalid">
           <small class="invalid" *ngIf="formulario.controls['email'].hasError('required')">Debe ingresar su email.</small>
           <small class="invalid" *ngIf="formulario.controls['email'].hasError('email')">Ingrese un email válido.</small>
@@ -27,7 +28,7 @@
 
       <div class="form-outline form-white mb-4">
         <input type="password" class="form-control form-control-lg" id="password" formControlName="password" placeholder="password" />
-        <label class="form-label" for="password">Password</label>
+        <label class="form-label" for="password">{{ 'login.formTwo' | translate }}</label>
         <div *ngIf="formulario.controls['password'].touched && formulario.controls['password'].invalid">
           <small class="invalid" *ngIf="formulario.controls['password'].hasError('required')">Debe ingresar su contraseña.</small>
         </div>

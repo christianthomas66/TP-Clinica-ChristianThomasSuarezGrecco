@@ -103,7 +103,12 @@ export default class PacienteComponent {
           turno.idEspecialista,
           'especialistas'
         );
-
+        console.log("ERROR GROSO???");
+        console.log(especialista.nombre);
+        console.log("===== POSIBLE ERROR =====");
+        console.log(especialista);
+        console.log(turno);
+        console.log("===== POSIBLE ERROR =====");
         turno.Especialista = especialista.nombre;
         turno.idEspecialista = especialista.uid;
       }

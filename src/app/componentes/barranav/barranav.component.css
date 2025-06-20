@@ -1,3 +1,22 @@
 .nav-link.active:hover {
     cursor: pointer;
   }
+
+.button-language {
+  display: flex;
+  gap: 14px;
+}
+
+.button-language .language-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.button-language .language-btn img {
+  width: 40px;
+  height: auto;
+}

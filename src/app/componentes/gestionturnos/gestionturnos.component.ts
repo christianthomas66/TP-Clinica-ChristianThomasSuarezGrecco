@@ -12,11 +12,13 @@ import { ListaturnosdisponiblesComponent } from '../listaturnosdisponibles/lista
 import { BarranavComponent } from '../barranav/barranav.component';
 import { AdminNavbarComponent } from '../usuarios/admin-navbar/admin-navbar.component';
 import { fadeScaleAnimation } from '../../animacion';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-gestionturnos',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ListaturnosdisponiblesComponent, BarranavComponent, AdminNavbarComponent, RouterOutlet],
+  imports: [CommonModule, ReactiveFormsModule, ListaturnosdisponiblesComponent, BarranavComponent, AdminNavbarComponent, RouterOutlet, NgbDropdownModule],
   templateUrl: './gestionturnos.component.html',
   styleUrl: './gestionturnos.component.css',
   animations:[fadeScaleAnimation]
@@ -34,11 +36,11 @@ export default class GestionturnosComponent {
   especialistasFiltrados: Especialista[] = [];
   pacientes: Paciente[] = [];
   especialidadSeleccionada: string | undefined = '';
-  esAdmin: boolean = false;
   fechaObtenida: boolean = false;
   especialista: string | undefined = undefined;
   paciente: string | undefined = undefined;
   especialistaFalso: boolean = false;
+  esAdmin: boolean = false;
   cargando: boolean = false;
   cargado: boolean = false; // Nueva variable para controlar la carga
 
@@ -76,6 +78,8 @@ export default class GestionturnosComponent {
   }
 
   enCambioEspecialidad(uid: any) {
+    console.log(uid);
+    
     this.especialidadSeleccionada = uid;
     this.formulario.controls['especialidad'].setValue(uid);
     this.filtrarEspecialistas();

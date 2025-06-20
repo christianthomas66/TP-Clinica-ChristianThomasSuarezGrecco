@@ -75,6 +75,10 @@ export class HistoriaclinicaComponent  {
     if (this.form.valid && this.turno) {
       this.historiaClinica = this.form.value;
 
+      console.log("===== HISTORIA CLINICA =====");
+      console.log(this.form.value);
+      console.log("===== HISTORIA CLINICA =====");
+
       const datosDinamicosObj = {
         rango: this.form.get('datosDinamicos.rango')?.value,
         numerico: this.form.get('datosDinamicos.nombreNumerico')?.value,
@@ -113,3 +117,55 @@ export class HistoriaclinicaComponent  {
     }
   }
 }
+
+/*
+specialties = [
+  {
+    name: "cardiologia",
+    schedules: [
+      {
+        dayWeek: 0,
+        startTime: esto tiene que ser un timestamp,
+        endTime: esto tiene que ser un timestamp,
+        isActive: false,
+      },
+      {
+        dayWeek: 1,
+        startTime: esto tiene que ser un timestamp,
+        endTime: esto tiene que ser un timestamp,
+        isActive: true,
+      },
+      {
+        dayWeek: 2,
+        startTime: esto tiene que ser un timestamp,
+        endTime: esto tiene que ser un timestamp,
+        isActive: true,
+      },
+      {
+        dayWeek: 3,
+        startTime: esto tiene que ser un timestamp,
+        endTime: esto tiene que ser un timestamp,
+        isActive: true,
+      },
+      {
+        dayWeek: 4,
+        startTime: esto tiene que ser un timestamp,
+        endTime: esto tiene que ser un timestamp,
+        isActive: true,
+      },
+      {
+        dayWeek: 5,
+        startTime: esto tiene que ser un timestamp,
+        endTime: esto tiene que ser un timestamp,
+        isActive: true,
+      },
+      {
+        dayWeek: 6,
+        startTime: esto tiene que ser un timestamp,
+        endTime: esto tiene que ser un timestamp,
+        isActive: true,
+      },
+    ]
+  }
+]
+*/

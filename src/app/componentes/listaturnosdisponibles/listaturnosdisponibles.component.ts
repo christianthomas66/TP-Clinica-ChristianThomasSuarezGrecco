@@ -10,13 +10,17 @@ import {
 import { CommonModule } from '@angular/common';
 import { Turno } from '../../clases/turno';
 import { AuthService } from '../../services/auth.service';
+import { BarranavComponent } from '../barranav/barranav.component';
+import { AdminNavbarComponent } from '../usuarios/admin-navbar/admin-navbar.component';
+import { fadeScaleAnimation } from '../../animacion';
 
 @Component({
   selector: 'app-listaturnosdisponibles',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, BarranavComponent, AdminNavbarComponent],
   templateUrl: './listaturnosdisponibles.component.html',
-  styleUrl: './listaturnosdisponibles.component.css'
+  styleUrl: './listaturnosdisponibles.component.css',
+  animations:[fadeScaleAnimation]
 })
 export class ListaturnosdisponiblesComponent implements OnInit, OnChanges{
   @Input() especialista: string | undefined;
@@ -87,8 +91,10 @@ export class ListaturnosdisponiblesComponent implements OnInit, OnChanges{
 
   seleccionarHora(dia: Date, hora: string): void {
     let fecha =  this.obtenerFechaFormateada(dia);
+    
     this.diaSeleccionado = fecha;
     this.horaSeleccionada = hora;
+
     this.seleccionarTurno();
   }
 
