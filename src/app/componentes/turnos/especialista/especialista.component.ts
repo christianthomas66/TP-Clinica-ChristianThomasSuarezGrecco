@@ -41,8 +41,10 @@ export default class EspecialistaComponent{
   .asObservable()
   .pipe(
     map((turnos) => {
+      console.log("AAAAAA");
       if (this.filtro && this.filtro.nativeElement) {
         const filtro = this.filtro.nativeElement.value.toLowerCase();
+
         return turnos.filter((turno) => {
           return Object.keys(turno).some((key) => {
             const val = turno[key];
@@ -80,11 +82,15 @@ export default class EspecialistaComponent{
   async ngOnInit(): Promise<void> {
     this.spinner.show();
     this.loading = true;
+    
     console.log(this.especialistaId);
+    
     await this.cargarTurnos();
+
     setTimeout(() => {
       this.spinner.hide();
     }, 2000);
+
     this.loading = false;
   }
 
@@ -96,11 +102,14 @@ export default class EspecialistaComponent{
         this.especialistaId,
         'especialista'
       );
+
+      console.log(`===== EL MEDICO CON ID ${this.especialistaId} TIENE LOS TURNOS =====`);
+      console.log(turnos);
       let especialidades = await this.firestoreService.obtenerEspecialidades();
 
       for (let turno of turnos) {
         let especialidad = especialidades.find(
-          (especialidad) => especialidad.id === turno.idEspecialidad
+          (especialidad) => especialidad.nombre = turno.idEspecialidad
         );
         turno.Especialidad = especialidad.nombre;
         turno.idEspecialidad = especialidad.id;

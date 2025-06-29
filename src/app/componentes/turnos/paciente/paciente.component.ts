@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { BarranavComponent } from '../../barranav/barranav.component';
 import { fadeScaleAnimation } from '../../../animacion';
+import { Especialidad } from '../../../clases/especialidad';
 
 @Component({
   selector: 'app-paciente',
@@ -94,8 +95,9 @@ export default class PacienteComponent {
       let especialidades = await this.authService.obtenerEspecialidades();
 
       for (let turno of turnos) {
+        console.log(`Turno: ${turno.idEspecialidad}`);
         let especialidad = especialidades.find(
-          (especialidad) => especialidad.id === turno.idEspecialidad
+          (especialidad) => especialidad.nombre = turno.idEspecialidad
         );
         turno.Especialidad = especialidad.nombre;
         turno.idEspecialidad = especialidad.id;

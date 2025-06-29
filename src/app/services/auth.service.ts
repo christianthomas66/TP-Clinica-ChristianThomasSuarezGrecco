@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, User, sendEmailVerification, getAuth, authState } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Firestore, addDoc, collection, doc, getDocs, getFirestore, query, updateDoc, where } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, doc, getDocs, getFirestore, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import Swal from 'sweetalert2';
 import { Admin } from '../clases/admin.js';
 import { Paciente } from '../clases/paciente.js';
@@ -209,7 +209,7 @@ export class AuthService {
     }
   }
 
-  public async guardarEspecialistaBD(especialista: Especialista) {
+  public async guardarEspecialistaBD(especialista: any) {
     try {
       const docRef = await addDoc(collection(this.db, 'especialistas'), {
         uid: especialista.uid,
@@ -217,16 +217,56 @@ export class AuthService {
         apellido: especialista.apellido,
         edad: especialista.edad,
         dni: especialista.dni,
-        especialidades: especialista.especialidades,
+        // especialidades: especialista.especialidades,
+        especialidades: this.getEspecialidades(especialista.especialidades),
         foto1: especialista.foto1,
         verificado: 'false',
       });
+
+      await setDoc(docRef, { id: docRef.id }, { merge: true });
       console.log('Documento escrito con ID: ', docRef.id);
       return true;
     } catch (e) {
       console.error('Error al agregar el documento: ', e);
       return false;
     }
+  }
+
+  getEspecialidades(especialidades: string[]) {
+    const especialidadesFormateadas = especialidades.map(x => {
+      return {
+        horarios: this.getHorarios(),
+        especialidad: x
+      };
+    });
+
+    return especialidadesFormateadas;
+  }
+
+  getHorarios() {
+    const horarios = [];
+    const ahora = new Date();
+
+    for (let i = 0; i < 7; i++) {
+      horarios.push({
+        diaSemana: i,
+        estaActivo: true,
+        fechaFinal: new Date(
+          ahora.getFullYear(),
+          ahora.getMonth(),
+          ahora.getDate(),
+          16, 0, 0, 0
+        ),
+        fechaInicio: new Date(
+          ahora.getFullYear(),
+          ahora.getMonth(),
+          ahora.getDate(),
+          8, 0, 0, 0
+        )
+      });
+    }
+
+    return horarios;
   }
 
   async guardarEspecialidad(especialidadNombre: string, especialidadesClinica: string[]): Promise<void> {
@@ -318,6 +358,20 @@ export class AuthService {
     }
   }
 
+  async getAppointmentList() {
+    const appointments: any[] = [];
+
+    const collRef = collection(this.db, 'turnos');
+    
+    const querySnapshot = await getDocs(collRef);
+
+    querySnapshot.forEach((doc) => {
+      appointments.push(doc.data());
+    });
+
+    return appointments;
+  }
+
   public async obtenerTurnos(especialistaId: string): Promise<Turno[]> {
     const q = query(
       collection(this.db, 'turnos'),
@@ -375,7 +429,7 @@ export class AuthService {
   public async obtenerTurnosDelUsuario(
     uid: string,
     tipo: string
-  ): Promise<Turno[]> {
+  ): Promise<any[]> {
     let condicion = 'especialista';
     if (tipo == 'paciente') {
       condicion = 'paciente';

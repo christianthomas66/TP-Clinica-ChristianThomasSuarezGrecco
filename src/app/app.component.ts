@@ -28,9 +28,9 @@ import { BarranavComponent } from './componentes/barranav/barranav.component';
 export class AppComponent {
   title = 'Clinica Online por Christian Thomas Suarez Grecco';
 
-  constructor() {
+  constructor(private translate: TranslateService) {
     // translate.setTranslation('en', translationsEN);
-    // translate.setDefaultLang('en');
+    translate.setDefaultLang('es');
     // translate.use('en');
     // Establece un idioma predeterminado
     // this.translate.setDefaultLang('es');

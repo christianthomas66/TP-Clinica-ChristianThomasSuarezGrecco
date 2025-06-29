@@ -28,11 +28,9 @@ export class HistoriaclinicaComponent  {
         [Validators.required, Validators.min(100), Validators.max(230)],
       ],
       peso: ['', [Validators.required, Validators.min(1), Validators.max(200)]],
-      temperatura: [
-        '',
-        [Validators.required, Validators.min(34), Validators.max(42)],
+      temperatura: ['',[Validators.required, Validators.min(34), Validators.max(42)],
       ],
-      presion: ['', Validators.required],
+      presion: ['', [Validators.required, Validators.min(0), Validators.max(120)]],
       datosDinamicos: this.fb.group({
         nombreRango: ['', Validators.required],
         rango: [0, [Validators.required, Validators.min(0), Validators.max(100)]],

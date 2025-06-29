@@ -21,9 +21,9 @@
             Seleccione una especialidad
           </button>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button type="button" ngbDropdownItem class="opcion" *ngFor="let especialidad of especialidades" (click)="enCambioEspecialidad(especialidad.uid)">
+            <button type="button" ngbDropdownItem class="opcion" *ngFor="let e of especialidades" (click)="enCambioEspecialidad(e.nombre)">
               <img src="assets/img/radiologia.jpg" alt="">
-              {{ especialidad.nombre }}
+              {{ e.nombre }}
             </button>
           </div>
         </div>

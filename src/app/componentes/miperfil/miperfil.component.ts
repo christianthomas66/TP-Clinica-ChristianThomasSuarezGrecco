@@ -318,31 +318,14 @@ export default class MiPerfilComponent implements OnInit {
       if (especialista) {
         const especialidades = await this.authService.obtenerEspecialidades();
         this.identidad = 'especialista';
+
         this.usuario = {
           ...especialista,
-          especialidades: especialista.especialidades.map(
-            (especialidadId: string) => {
-              const especialidad = especialidades.find(
-                (esp: any) => esp.id === especialidadId
-              );
-              return especialidad
-                ? especialidad.nombre
-                : 'Especialidad Desconocida';
-            }
-          ),
-          especialidadesMap: especialista.especialidades.reduce(
-            (map: any, especialidadId: string) => {
-              const especialidad = especialidades.find(
-                (esp: any) => esp.id === especialidadId
-              );
-              if (especialidad) {
-                map[especialidad.nombre] = especialidadId;
-              }
-              return map;
-            },
-            {}
-          ),
+          especialidades: especialista.especialidades
         };
+
+        console.log("===== Mi Perfil Componente =====");
+        console.log(this.usuario);
 
         console.log("Mi Perfil Component");
         console.log(this.usuario.turnos);

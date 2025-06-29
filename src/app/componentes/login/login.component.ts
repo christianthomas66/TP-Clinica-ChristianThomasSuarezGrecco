@@ -28,12 +28,12 @@ export default class LoginComponent implements OnInit {
   registroActivo: boolean = false;
 
   usuariosAccesoRapido = [
-    { email: 'jaffiddaujixu-2835@yopmail.com', password: '123456', tipo: 'Paciente Joana', imagen: 'assets/img/pac1.jpg' },
-    { email: 'crihadelludda-9566@yopmail.com', password: '123456', tipo: 'Paciente Carlos', imagen: 'assets/img/pac2.jpg' },
-    { email: 'gregrakequetto-5258@yopmail.com', password: '123456', tipo: 'Paciente Eugenio', imagen: 'assets/img/pac3.jpg' },
-    { email: 'prouxoinauxiho-7374@yopmail.com', password: '123456', tipo: 'Especialista Melisa', imagen: 'assets/img/esp1.jpg' },
-    { email: 'grousuruhade-3124@yopmail.com', password: '123456', tipo: 'Especialista Miguel', imagen: 'assets/img/esp2.jpg' },
-    { email: 'christian022198@gmail.com', password: '1234567', tipo: 'Administrador Christian Thomas', imagen: 'assets/img/thomyadmin.jpg' }
+    { email: 'jaffiddaujixu-2835@yopmail.com', password: '123456', tipoPaciente1: 'Paciente Joana', imagen: 'assets/img/pac1.jpg' },
+    { email: 'crihadelludda-9566@yopmail.com', password: '123456', tipoPaciente2: 'Paciente Carlos', imagen: 'assets/img/pac2.jpg' },
+    { email: 'gregrakequetto-5258@yopmail.com', password: '123456', tipoPaciente3: 'Paciente Eugenio', imagen: 'assets/img/pac3.jpg' },
+    { email: 'aejex9nsx6@zvvzuv.com', password: '123456', tipoMedico1: 'Especialista Melisa', imagen: 'assets/img/esp1.jpg' },
+    { email: 'grousuruhade-3124@yopmail.com', password: '123456', tipoMedico2: 'Especialista Miguel', imagen: 'assets/img/esp2.jpg' },
+    { email: 'christian022198@gmail.com', password: '1234567', tipoAdmin: 'Administrador Christian Thomas', imagen: 'assets/img/thomyadmin.jpg' }
   ];
 
   constructor(

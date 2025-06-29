@@ -14,6 +14,10 @@ import { AuthService } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
 import { CustomCaptchaDirective } from '../../../customCaptchaDirective';
 import { CaptchaDirectivaComponent } from '../../captcha-directiva/captcha-directiva.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../../../services/language.service';
+
 
 @Component({
   selector: 'app-registroespecialista',
@@ -34,7 +38,6 @@ export default class RegistroespecialistaComponent {
   especialidades: Especialidad[] = [];
   captchaResuelto: boolean = false; // Variable para controlar el captcha
   captchaHabilitado: boolean = true; // Variable para habilitar o deshabilitar el captcha
-
   especialidadesClinica: string[] = [
    "Especialidades Médicas",
    "Clínica Médica",
@@ -107,6 +110,7 @@ export default class RegistroespecialistaComponent {
    "Cuidados Paliativos",
    "Sexología Clínica"
  ];
+
 
   constructor(private autenticacion: AuthService, private ruta: Router) {}
 
@@ -239,16 +243,31 @@ export default class RegistroespecialistaComponent {
       };
       this.usuario = await this.autenticacion.registrar(data);
 
-      let usuario = new Especialista(
-        this.usuario.uid,
-        this.formulario.controls['especialistaNombre'].value,
-        this.formulario.controls['especialistaApellido'].value,
-        this.formulario.controls['especialistaEdad'].value,
-        this.formulario.controls['especialistaDni'].value,
-        especialidadesSeleccionadas.map((especialidad) => especialidad.uid),
-        this.imagenURL,
-        'false'
-      );
+      
+      
+      let usuario = {
+        uid: this.usuario.uid,
+        nombre: this.formulario.controls['especialistaNombre'].value,
+        apellido: this.formulario.controls['especialistaApellido'].value,
+        edad: this.formulario.controls['especialistaEdad'].value,
+        dni: this.formulario.controls['especialistaDni'].value,
+        // especialidadesUid: especialidadesSeleccionadas.map((especialidad) => especialidad.uid),
+        especialidades: especialidadesSeleccionadas.map((especialidad) => especialidad.nombre),
+        foto1: this.imagenURL,
+        verificado: 'false'
+      }
+      // let usuario = new Especialista(
+      //   this.usuario.uid,
+      //   this.formulario.controls['especialistaNombre'].value,
+      //   this.formulario.controls['especialistaApellido'].value,
+      //   this.formulario.controls['especialistaEdad'].value,
+      //   this.formulario.controls['especialistaDni'].value,
+      //   //especialidadesSeleccionadas.map((especialidad) => especialidad.uid),
+      //   especialidadesSeleccionadas.map((especialidad) => especialidad.nombre),
+      //   this.imagenURL,
+      //   'false'
+      // );
+      console.log("Se esta registrando el usuario especialista");
       await this.autenticacion.guardarEspecialistaBD(usuario);
       Swal.fire({
         icon: 'success',
@@ -286,7 +305,7 @@ export default class RegistroespecialistaComponent {
         title: 'Captcha Correcto',
         text: 'El captcha fue solucionado correctamente',
         showConfirmButton: false,
-        timer: 3000,
+        timer: 2000,
       });
     }
   }

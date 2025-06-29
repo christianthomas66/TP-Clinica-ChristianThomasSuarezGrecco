@@ -2,11 +2,11 @@
 
 <section class="container" @slideInFromBottomAnimation>
   <div class="access bg-dark">
-    <h5>Acceso Rápido:</h5>
+    <h5>{{ 'accesoRapido.accesoRapidoBoton' | translate }} </h5>
     <div class="btn-container d-flex justify-content-around flex-wrap">
       <button *ngFor="let usuario of usuariosAccesoRapido" class="btn btn-secondary m-2" (click)="onButtonClick(usuario)">
         <img [src]="usuario.imagen" alt="Imagen de perfil" class="picture">
-        <p>{{ usuario.tipo }}</p>
+        <p [innerHTML]="'accesoRapido.especialistaMelisa' | translate">{{ usuario.tipoMedico1 }}</p>
       </button>
     </div>
   </div>
@@ -18,7 +18,7 @@
       <p class="text-white-50 mb-5">{{ 'login.description' | translate }}</p>
 
       <div class="form-outline form-white mb-4">
-        <input type="email" class="form-control form-control-lg" id="email" placeholder="name@example.com" formControlName="email" />
+        <input type="email" class="form-control form-control-lg" id="email" formControlName="email" [placeholder]="'input1.placeholder' | translate:{ name: '' }"  />
         <label class="form-label" for="email">{{ 'login.formOne' | translate }}</label>
         <div *ngIf="formulario.controls['email'].touched && formulario.controls['email'].invalid">
           <small class="invalid" *ngIf="formulario.controls['email'].hasError('required')">Debe ingresar su email.</small>
@@ -27,7 +27,7 @@
       </div>
 
       <div class="form-outline form-white mb-4">
-        <input type="password" class="form-control form-control-lg" id="password" formControlName="password" placeholder="password" />
+        <input type="password" class="form-control form-control-lg" id="password" formControlName="password" [placeholder]="'input2.placeholder' | translate:{ name: '' }"/>
         <label class="form-label" for="password">{{ 'login.formTwo' | translate }}</label>
         <div *ngIf="formulario.controls['password'].touched && formulario.controls['password'].invalid">
           <small class="invalid" *ngIf="formulario.controls['password'].hasError('required')">Debe ingresar su contraseña.</small>

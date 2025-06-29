@@ -23,10 +23,10 @@
       <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title">{{ obtenerFechaFormateada(dia.dia) }}</h5>
-          <div *ngFor="let hora of dia.horarios">
+          <div *ngFor="let hora of dia.horariosDisponibles">
             <div class="form-check">
               <button type="button" class="btn btn-primary" (click)="seleccionarHora(dia.dia, hora)">
-                {{ hora }}
+                {{ hora | date : "h:mm aa" }}
               </button>
               <!-- <input
                 class="form-check-input"

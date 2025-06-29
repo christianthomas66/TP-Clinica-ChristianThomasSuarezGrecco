@@ -31,8 +31,10 @@ export default class GestionturnosComponent {
   formulario!: FormGroup;
   errorChequeo: boolean = false;
   mensaje: string = '';
-  especialidades: Especialidad[] = [];
-  especialistas: Especialista[] = [];
+  especialidades: any[] = [];
+  // especialidades: Especialidad[] = [];
+  especialistas: any[] = [];
+  // especialistas: Especialista[] = [];
   especialistasFiltrados: Especialista[] = [];
   pacientes: Paciente[] = [];
   especialidadSeleccionada: string | undefined = '';
@@ -101,57 +103,74 @@ export default class GestionturnosComponent {
 
   async cargarEspecialidades() {
     const datosEspecialidades = await this.servicioAutenticacion.obtenerEspecialidades();
-    this.especialidades = datosEspecialidades.map((datosEspecialidad: any) => {
-      const especialidad = new Especialidad(
-        datosEspecialidad.id,
-        datosEspecialidad.nombre,
-        datosEspecialidad.foto
-      );
-      return especialidad;
-    });
+
+    this.especialidades = datosEspecialidades;
+    // this.especialidades = datosEspecialidades.map((datosEspecialidad: any) => {
+    //   const especialidad = new Especialidad(
+    //     datosEspecialidad.id,
+    //     datosEspecialidad.nombre,
+    //     datosEspecialidad.foto
+    //   );
+    //   return especialidad;
+    // });
 
     this.cargarEspecialistas();
   }
 
   async cargarEspecialistas() {
     const datosEspecialistas = await this.servicioAutenticacion.obtenerEspecialistas();
-    const especialidades = this.especialidades;
+    this.especialistas = datosEspecialistas;
 
-    this.especialistas = datosEspecialistas.map((datosEspecialista: any) => {
-      const especialidadesDelEspecialista = Array.isArray(
-        datosEspecialista.especialidades
-      )
-        ? datosEspecialista.especialidades.map((idEspecialidad: string) => {
-            const especialidad = especialidades.find(
-              (esp: any) => esp.uid === idEspecialidad
-            );
-            return especialidad ? especialidad.uid : 'Especialidad Desconocida';
-          })
-        : [];
-      let esp = new Especialista(
-        datosEspecialista.uid,
-        datosEspecialista.nombre,
-        datosEspecialista.apellido,
-        datosEspecialista.edad,
-        datosEspecialista.dni,
-        especialidadesDelEspecialista,
-        datosEspecialista.foto1,
-        datosEspecialista.verificado
-      );
-      esp.turnos = datosEspecialista.turnos;
-      return esp;
-    });
+    // this.especialistas = datosEspecialistas.map((datosEspecialista: any) => {
+    //   const especialidadesDelEspecialista = Array.isArray(datosEspecialista.especialidades) ? datosEspecialista.especialidades.map((idEspecialidad: string) => {
+    //     const especialidad = especialidades.find(
+    //           (esp: any) => esp.uid === idEspecialidad
+    //         );
+    //         return especialidad ? especialidad.uid : 'Especialidad Desconocida';
+    //       })
+    //     : [];
+
+    // console.log(this.especialistas);
+        
+    //   let esp = new Especialista(
+    //     datosEspecialista.uid,
+    //     datosEspecialista.nombre,
+    //     datosEspecialista.apellido,
+    //     datosEspecialista.edad,
+    //     datosEspecialista.dni,
+    //     especialidadesDelEspecialista,
+    //     datosEspecialista.foto1,
+    //     datosEspecialista.verificado
+    //   );
+    //   esp.turnos = datosEspecialista.turnos;
+    //   return esp;
+    //   // return 1;
+    // });
   }
 
   filtrarEspecialistas() {
-    this.especialistasFiltrados = this.especialistas.filter(
-      (especialista: any) =>
-        especialista.especialidades.includes(this.especialidadSeleccionada) &&
-        especialista.verificado == 'true'
-    );
+    console.log("========== Medicos ==========");
+    console.log(this.especialistas);
+
+    this.especialistasFiltrados = this.especialistas.filter((e: any) => {
+      console.log(`El medico ${e.nombre} ${e.apellido} tiene la especialidad?: ${this.especialidadSeleccionada}`);
+      console.log(e.especialidades.some(x => x.especialidad == this.especialidadSeleccionada));
+      console.log("========================================================");
+
+      return e.especialidades.some(x => x.especialidad == this.especialidadSeleccionada) && e.verificado == 'true'
+    });
+
+    console.log(this.especialistasFiltrados);
+    // this.especialistasFiltrados = this.especialistas.filter(
+    //   (especialista: any) =>
+    //     especialista.especialidades.includes(this.especialidadSeleccionada) &&
+    //     especialista.verificado == 'true'
+    // );
   }
 
-  enTurnoSeleccionado(turno: { dia: string; hora: string }) {
+  enTurnoSeleccionado(turno: any) {
+    console.log("===== GESTION TURNOS COMPONENT  =====");
+    console.log(turno);
     if (turno.hora == '') {
       this.fechaObtenida = false;
       this.especialista = undefined;
@@ -252,6 +271,8 @@ export default class GestionturnosComponent {
 
   async cargarTurno(paciente: string) {
     try {
+      console.log("===== GESTION TURNOS | CARGAR TURNO =====");
+      console.log(paciente);
       let turno = new Turno(
         '',
         this.formulario.controls['especialista'].value,

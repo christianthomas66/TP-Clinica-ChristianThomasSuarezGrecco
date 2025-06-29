@@ -15,6 +15,29 @@
             "card3Descripcion": "Nos destacamos na excelência médica, oferecendo serviços respaldados por tecnologia avançada."
         }
     },
+
+"login": {
+        "title": "Conecte-se",
+        "description": "Por favor insira seu e-mail e senha",
+        "formOne": "E-mail",
+        "formTwo": "Senha"
+    },
+
+    
+    "input1.placeholder": "nome@example.com {{name}}",
+    "input2.placeholder": "Sehna {{name}}",
+    
+
+    "accesoRapido":{
+        "accesoRapidoBoton": "Acesso rápido: ",
+        "pacienteJoana": "Paciente Joana",
+        "pacienteCarlos": "Paciente Carlos",
+        "pacienteEugenio": "Paciente Eugenio",
+        "especialistaMelisa": "doutora Melissa",
+        "especialistaMiguel": "doutor Miguel",
+        "administradorChristian": "Administrador Christian Thomas"
+    },
+
     "menu": {
         "miPerfil": "Meu perfil",
         "turnosSolicitados": "Turnos solicitados",

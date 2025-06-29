@@ -23,6 +23,20 @@
         "formOne": "Correo electronico",
         "formTwo": "Contraseña"
     },
+
+    "input1.placeholder": "nombre@example.com {{name}}",
+    "input2.placeholder": "contraseña {{name}}",
+
+    "accesoRapido":{
+        "accesoRapidoBoton": "Acceso rapido: ",
+        "pacienteJoana": "Paciente Joana",
+        "pacienteCarlos": "Paciente Carlos",
+        "pacienteEugenio": "Paciente Eugenio",
+        "especialistaMelisa": "Especialista Melisa",
+        "especialistaMiguel": "Especialista Miguel",
+        "administradorChristian": "Administrator Christian Thomas"
+    },
+
     "menu": {
         "miPerfil": "Mi perfil",
         "turnosSolicitados": "Turnos solicitados",

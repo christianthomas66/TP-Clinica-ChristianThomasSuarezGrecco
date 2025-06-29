@@ -19,6 +19,8 @@ export class HorariosComponent implements OnInit {
   especialidades: any[] = [];
   currentSpecialty: string = '';
 
+  especialidadActual: any;
+
   active = 'top';
   doctorId!: string;
 
@@ -41,16 +43,16 @@ export class HorariosComponent implements OnInit {
 
       this.doctorId = doctor.uid;
 
-      console.log("===== MOSTRAR DOCTOR =====");
-      console.log(doctor.especialidades);
-      console.log("===== MOSTRAR DOCTOR =====");
-
       this.especialidades = doctor.especialidades;
     }
   }
 
-  onChangeSpecialty(specialty: string) {
+  async onChangeSpecialty(specialty: string) {
     this.currentSpecialty = specialty;
+
+    this.especialidadActual = this.especialidades.find(x => x.especialidad == specialty);
+
+    console.log(this.especialidadActual);
   }
 
   async onChangeTime(e: any, diaSemana: number, fecha: string) {
@@ -59,29 +61,42 @@ export class HorariosComponent implements OnInit {
 
     const currentDate = new Date();
     const updatedDate = new Date(currentDate.setHours(hours, minutes, 0, 0));
-
-    const specialtyIndex = this.especialidades.findIndex(
-      x => x.nombre === this.currentSpecialty
-    );
-
-    const horarioIndex = this.especialidades[specialtyIndex].horarios.findIndex(
-      h => h.diaSemana === diaSemana
-    );
-
-    if (fecha === 'inicio') {
-      this.especialidades[specialtyIndex].horarios[horarioIndex].fechaInicio = Timestamp.fromDate(updatedDate);
-    } else {
-      this.especialidades[specialtyIndex].horarios[horarioIndex].fechaFinal = Timestamp.fromDate(updatedDate);
-    }
-
-    const specialistsCollectionRef = collection(this._firestore, 'especialistas');
-
-    const q = query(specialistsCollectionRef, where('id', '==', this.doctorId));
-
+    
+    let idEspecialidad = 0;
+    
+    const collRef = collection(this._firestore, 'especialistas');
+    
+    const q = query(collRef, where('uid', '==', this.doctorId));
+    
     const querySnapshot = await getDocs(q);
+    
+    querySnapshot.forEach((doc) => {
+      const data = doc.data() as any;
 
-    const specialistDoc = querySnapshot.docs[0];
-    const specialistDocRef = doc(this._firestore, `especialistas/${specialistDoc.id}`);
+      if (data.uid == this.doctorId) {
+        idEspecialidad = data.id;
+        
+        data.especialidades.forEach(element => {
+          if (element.especialidad == this.currentSpecialty) {
+            const specialtyIndex = this.especialidades.findIndex(
+              x => x.especialidad === this.currentSpecialty
+            );
+            
+            const horarioIndex = this.especialidades[specialtyIndex].horarios.findIndex(
+              h => h.diaSemana === diaSemana
+            );
+            
+            if (fecha === 'inicio') {
+              this.especialidades[specialtyIndex].horarios[horarioIndex].fechaInicio = Timestamp.fromDate(updatedDate);
+            } else {
+              this.especialidades[specialtyIndex].horarios[horarioIndex].fechaFinal = Timestamp.fromDate(updatedDate);
+            }
+          }
+        });
+      }
+    });
+    
+    const specialistDocRef = doc(this._firestore, `especialistas/${idEspecialidad}`);
 
     await updateDoc(specialistDocRef, { especialidades: this.especialidades });
   }

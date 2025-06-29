@@ -100,12 +100,12 @@
             <p class="card-text">Edad: {{ usuario.edad }}</p>
             <p class="card-text">Especialidades:</p>
             <ul>
-              <li *ngFor="let especialidad of usuario.especialidades">
-                {{ especialidad }}
-                <p>
+              <li *ngFor="let e of usuario.especialidades">
+                {{ e.especialidad }}
+                <!-- <p>
                   Horario:
                   {{ horario[usuario.especialidadesMap[especialidad]] }}
-                </p>
+                </p> -->
               </li>
             </ul>
             <button

@@ -24,6 +24,9 @@
         "formTwo": "Password"
     },
 
+    "input1.placeholder": "name@example.com {{name}}",
+    "input2.placeholder": "password {{name}}",
+
     "accesoRapido":{
         "accesoRapidoBoton": "Quick access: ",
         "pacienteJoana": "Patient joana",
@@ -94,6 +97,7 @@
         "2° Foto del paciente": "2nd photo of the patient"
     },
     "registroEspecialistas":{
+        "tituloEsp": "REGISTER SPECIALIST",
         "nombre del especialista": "Specialist name",
         "apellido del especialista": "Specialist's last name",
         "edad del especialista": "Specialist age",

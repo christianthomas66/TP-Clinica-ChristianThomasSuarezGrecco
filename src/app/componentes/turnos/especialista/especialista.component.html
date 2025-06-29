@@ -36,7 +36,7 @@
             </span>
           </h4>
           <h6 class="card-title">
-            Fecha: {{ turno.fecha }} a las {{ turno.hora }} hs.
+            Fecha: {{ turno.fecha }} a las {{ turno.hora.toDate() | date : "h:mm aa" }} hs.
           </h6>
           <p class="card-text">
             {{ turno.Paciente ? 'Paciente: ' + turno.Paciente : 'Especialista: ' + turno.Especialista }}

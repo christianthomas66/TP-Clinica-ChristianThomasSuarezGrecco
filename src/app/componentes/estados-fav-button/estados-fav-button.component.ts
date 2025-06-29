@@ -16,7 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class EstadosFavButtonComponent {
   active = 1;
-  especialistas: Especialista[] = [];
+  especialistas: any[] = [];
   administradores: any[] = [];
   pacientes: any[] = [];
   loading: boolean = false;
@@ -52,35 +52,49 @@ export class EstadosFavButtonComponent {
       });
   }
 
+  formatearEspecialidades(especialidades: any) {
+    const formateado = especialidades.map(x => x.especialidad);
+
+    console.log("FORMATEADO");
+    console.log(formateado);
+
+    return formateado;
+  }
+
   async cargarEspecialistas() {
     const especialistasData = await this.authService.obtenerEspecialistas();
     const especialidades = await this.authService.obtenerEspecialidades();
 
-    this.especialistas = especialistasData.map((especialistaData: any) => {
-      const especialidadesDelEspecialista = Array.isArray(
-        especialistaData.especialidades
-      )
-        ? especialistaData.especialidades.map((especialidadId: string) => {
-            const especialidad = especialidades.find(
-              (esp: any) => esp.id === especialidadId
-            );
-            return especialidad
-              ? especialidad.nombre
-              : 'Especialidad Desconocida';
-          })
-        : [];
+    this.especialistas = especialistasData;
 
-      return new Especialista(
-        especialistaData.uid,
-        especialistaData.nombre,
-        especialistaData.apellido,
-        especialistaData.edad,
-        especialistaData.dni,
-        especialidadesDelEspecialista,
-        especialistaData.foto1,
-        especialistaData.verificado
-      );
-    });
+    console.log("===== ESPECIALISTAS =====");
+    console.log(this.especialistas);
+
+    // this.especialistas = especialistasData.map((especialistaData: any) => {
+    //   const especialidadesDelEspecialista = Array.isArray(
+    //     especialistaData.especialidades
+    //   )
+    //     ? especialistaData.especialidades.map((especialidadId: string) => {
+    //         const especialidad = especialidades.find(
+    //           (esp: any) => esp.id === especialidadId
+    //         );
+    //         return especialidad
+    //           ? especialidad.nombre
+    //           : 'Especialidad Desconocida';
+    //       })
+    //     : [];
+
+    //   return new Especialista(
+    //     especialistaData.uid,
+    //     especialistaData.nombre,
+    //     especialistaData.apellido,
+    //     especialistaData.edad,
+    //     especialistaData.dni,
+    //     especialidadesDelEspecialista,
+    //     especialistaData.foto1,
+    //     especialistaData.verificado
+    //   );
+    // });
   }
 
   async aceptarEspecialista(especialista: Especialista): Promise<void> {
