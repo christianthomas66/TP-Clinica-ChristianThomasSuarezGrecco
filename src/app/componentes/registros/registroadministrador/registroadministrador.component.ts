@@ -13,11 +13,12 @@ import { CommonModule } from '@angular/common';
 import { AdminNavbarComponent } from '../../usuarios/admin-navbar/admin-navbar.component';
 import { CustomCaptchaDirective } from '../../../customCaptchaDirective';
 import { slideInFromTopAnimation, fadeScaleAnimation } from '../../../animacion';
+import { CaptchaDirectivaComponent } from '../../captcha-directiva/captcha-directiva.component';
 
 @Component({
   selector: 'app-registroadministrador',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, AdminNavbarComponent, RouterOutlet, CustomCaptchaDirective],
+  imports: [CommonModule, ReactiveFormsModule, AdminNavbarComponent, RouterOutlet, CustomCaptchaDirective, CaptchaDirectivaComponent],
   templateUrl: './registroadministrador.component.html',
   styleUrl: './registroadministrador.component.css',
   animations: [slideInFromTopAnimation, fadeScaleAnimation]
@@ -143,6 +144,16 @@ export default class RegistroadministradorComponent {
 
   onCaptchaResolved(resolved: boolean) {
     this.captchaResuelto = resolved;
+
+    if (resolved) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Captcha Correcto',
+        text: 'El captcha fue solucionado correctamente',
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
   }
 
   toggleCaptcha() {

@@ -492,12 +492,12 @@ export class AuthService {
     const turnoRef = doc(this.db, 'turnos', turno.uid);
 
     await updateDoc(turnoRef, {
-      especialidad: turno.idEspecialidad,
-      especialista: turno.idEspecialista,
-      paciente: turno.idPaciente,
+      // especialidad: turno.idEspecialidad,
+      // especialista: turno.idEspecialista,
+      // paciente: turno.idPaciente,
       estado: turno.estado,
-      fecha: turno.fecha,
-      hora: turno.hora,
+      // fecha: turno.fecha,
+      // hora: turno.hora,
       resena: turno.resena,
       comentario: turno.comentario,
       atencion: turno.atencion,
@@ -582,31 +582,31 @@ export class AuthService {
     }
   }
 
-  public async obtenerTodosLosTurnos(): Promise<Turno[]> {
+  public async obtenerTodosLosTurnos(): Promise<any[]> {
     const querySnapshot = await getDocs(collection(this.db, 'turnos'));
-    const turnos: Turno[] = [];
+    const turnos: any[] = [];
 
     querySnapshot.forEach((doc) => {
       const turnoData = doc.data();
-      const turno = new Turno(
-        doc.id,
-        turnoData['especialista'],
-        turnoData['especialidad'],
-        turnoData['paciente'],
-        turnoData['estado'],
-        turnoData['fecha'],
-        turnoData['hora']
-      );
-      if (turnoData['comentario']) {
-        turno.comentario = turnoData['comentario'];
-      }
-      if (turnoData['resena']) {
-        turno.resena = turnoData['resena'];
-      }
-      if (turnoData['historiaClinica']) {
-        turno.historiaClinica = turnoData['historiaClinica'];
-      }
-      turnos.push(turno);
+      // const turno = new Turno(
+      //   doc.id,
+      //   turnoData['especialista'],
+      //   turnoData['especialidad'],
+      //   turnoData['paciente'],
+      //   turnoData['estado'],
+      //   turnoData['fecha'],
+      //   turnoData['hora']
+      // );
+      // if (turnoData['comentario']) {
+      //   turno.comentario = turnoData['comentario'];
+      // }
+      // if (turnoData['resena']) {
+      //   turno.resena = turnoData['resena'];
+      // }
+      // if (turnoData['historiaClinica']) {
+      //   turno.historiaClinica = turnoData['historiaClinica'];
+      // }
+      turnos.push(turnoData);
     });
 
     return turnos;

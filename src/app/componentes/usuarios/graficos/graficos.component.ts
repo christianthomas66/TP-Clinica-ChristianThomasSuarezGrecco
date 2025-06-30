@@ -190,8 +190,11 @@ export default class GraficosComponent implements OnInit {
     let counts: { [key: string]: number } = {};
     this.Especialidades.forEach((esp: any) => {
       let key = esp.id;
-      counts[key] = this.EspecialidadesxTurno.filter(
-        (turno) => turno.idEspecialidad === esp.id
+      counts[key] = this.EspecialidadesxTurno.filter((turno) => {
+
+          return turno.especialidad == esp.nombre
+          // return turno.idEspecialidad == esp.id
+        }
       ).length;
     });
 
@@ -257,7 +260,7 @@ export default class GraficosComponent implements OnInit {
       if (parts.length < 2) return new Date();
       const dateStr = parts[1].trim();
       const [day, month, year] = dateStr.split('/').map(part => part.trim());
-      const date = new Date(`${year}-${month}-${day}T00:00:00Z`);
+      const date = new Date(`${year}-${month}-${day}`);
       return isNaN(date.getTime()) ? new Date() : date;
     };
 
@@ -269,19 +272,34 @@ export default class GraficosComponent implements OnInit {
       return;
     }
 
+    console.log("GRAFICO CON LAS FECHAS");
     const turnosFiltrados = this.EspecialidadesxTurno.filter((turno: any) => {
       if (!turno.fecha) return false;
       const fechaTurno = parseDate(turno.fecha);
-      return fechaTurno >= fechaInicio && fechaTurno <= fechaFin;
+
+      console.log(turno);
+      console.log(fechaTurno);
+      console.log(fechaInicio);
+      console.log(fechaFin);
+      console.log("IF");
+      console.log(fechaTurno >= fechaInicio);
+      console.log(fechaTurno <= fechaFin);
+      console.log("=======================================");
+
+      return fechaTurno >= fechaInicio || fechaTurno <= fechaFin;
+      // return fechaTurno >= fechaInicio && fechaTurno <= fechaFin;
     });
 
     const counts: { [key: string]: number } = {};
     const countsByDoctor: { [key: string]: { [key: string]: number } } = {};
 
+    console.log("====== FOR EACH LINEA 292 ======");
     turnosFiltrados.forEach((turno: any) => {
+      console.log(turno);
+      console.log(countsByDoctor);
       const fecha = turno.fecha || '';
       const key = parseDate(fecha).toISOString().split('T')[0];
-      const doctorKey = turno.Especialista || 'Desconocido';
+      const doctorKey = turno.Especialista || 'xD';
 
       counts[key] = (counts[key] || 0) + 1;
 
@@ -332,9 +350,13 @@ export default class GraficosComponent implements OnInit {
       let fechaFin = new Date(this.fechaFin2).getTime();
 
       return (
-        fechaTurno >= fechaInicio &&
+        fechaTurno >= fechaInicio ||
         fechaTurno <= fechaFin
       );
+      // return (
+      //   fechaTurno >= fechaInicio &&
+      //   fechaTurno <= fechaFin
+      // );
     });
 
     let countsByDoctor = turnosFiltrados.reduce((acc: any, turno: any) => {

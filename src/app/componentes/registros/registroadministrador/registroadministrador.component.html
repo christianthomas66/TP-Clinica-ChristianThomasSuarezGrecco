@@ -93,13 +93,14 @@
                 </div>
               </div>
 
-              <div class="text-center mb-4" *ngIf="captchaHabilitado">
+              <app-captcha (corrected)="onCaptchaResolved($event)" />
+              <!-- <div class="text-center mb-4" *ngIf="captchaHabilitado">
                 <button appCustomCaptcha (captchaResolved)="onCaptchaResolved($event)">
                   <img *ngIf="!captchaResuelto" src="assets/img/captchaPropio.png" alt="Cuadrado" style="width: 20px; height: 20px;">
                   <img *ngIf="captchaResuelto" src="assets/img/captchaResuelto.png" alt="Checkmark" style="width: 20px; height: 20px;">
                   {{ captchaResuelto ? 'Captcha resuelto' : 'Resolver Captcha' }}
                 </button>
-              </div>
+              </div> -->
 
               <div class="text-center">
                 <button class="btn btn-outline-light btn-lg px-5" type="submit" [disabled]="captchaHabilitado && !captchaResuelto">
@@ -108,12 +109,12 @@
               </div>
               <hr>
 
-              <div class="text-center">
+              <!-- <div class="text-center">
                 <button class="btn-toggle-captcha" (click)="toggleCaptcha()"
                         [ngClass]="{'enabled': captchaHabilitado, 'disabled': !captchaHabilitado}">
                   {{ captchaHabilitado ? 'Deshabilitar Captcha' : 'Habilitar Captcha' }}
                 </button>
-              </div>
+              </div> -->
 
               <hr>
             </form>

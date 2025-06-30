@@ -39,12 +39,13 @@
           </h4>
 
           <h6 class="card-title">
-            Fecha: {{ turno.fecha }} a las {{ turno.hora }} hs.
+            Fecha: {{ turno.fecha }} a las {{ turno.hora.toDate() | date : "h:mm aa"  }} hs.
           </h6>
           <p class="card-text">Especialista: {{ turno.Especialista }}</p>
           <p class="card-text">Especialidad: {{ turno.Especialidad }}</p>
           <p class="card-text">Paciente: {{ turno.Paciente }}</p>
-          <div class="card mb-3 bg-secondary text-white border-secondary" *ngIf="turno.historiaClinica !== null">
+
+          <div class="card mb-3 bg-secondary text-white border-secondary" *ngIf="turno.historiaClinica !== null && turno.estado !== 'espera'">
             <div class="card-header bg-dark text-white border-secondary">
               <h2>Historia Clínica</h2>
             </div>
@@ -71,6 +72,9 @@
               </div>
             </div>
           </div>
+
+
+
           <div
             class="form-group"
             *ngIf="comentario && turno.uid == turnoA?.uid"

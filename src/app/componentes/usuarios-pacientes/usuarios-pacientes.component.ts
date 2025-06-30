@@ -9,6 +9,16 @@ import { AdminNavbarComponent } from '../usuarios/admin-navbar/admin-navbar.comp
 import { RouterOutlet } from '@angular/router';
 import { EspecialistaNavbarComponent } from '../especialista-navbar/especialista-navbar.component';
 import { fadeScaleAnimation, rotateAnimation } from '../../animacion';
+import {
+  collection,
+  doc,
+  Firestore,
+  getDocs,
+  query,
+  setDoc,
+  updateDoc,
+  where,
+} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-usuarios-pacientes',
@@ -21,14 +31,14 @@ import { fadeScaleAnimation, rotateAnimation } from '../../animacion';
 export default class UsuariosPacientesComponent {
   identidad: string | null = '';
   usuario: any = null;
-  historiasClinicas: Turno[] = [];
-  historiasClinicasPorPaciente: Turno[] = [];
-  turno: Turno | null = null;
+  historiasClinicas: any[] = [];
+  historiasClinicasPorPaciente: any[] = [];
+  turno: any | null = null;
   historiaVer: boolean = false;
   mostrar: boolean = false;
   loading: boolean = false;
   historiapruebaPdf: HistoriaClinica = new HistoriaClinica();
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private _firestore: Firestore) {}
 
   async ngOnInit(): Promise<void> {
     if (this.loading) {
@@ -52,7 +62,10 @@ export default class UsuariosPacientesComponent {
 
   descargarHistoriasClinicas(Turnos: Turno[]) {
     // Convertir cada historia clínica en un objeto que se pueda convertir a Excel
+    console.log("USUARIOS PACIENTES COMPONENT");
     const historiasClinicasArray = Turnos.map((turno) => {
+      console.log(turno);
+
       // Crear una copia de historiaClinica para no modificar el objeto original
       let historiaClinicaCopia: Partial<Turno> = {
         ...turno,
@@ -94,8 +107,22 @@ export default class UsuariosPacientesComponent {
 
   historiasClinicasUnicas: Turno[] = [];
 
+  async getUserById(doctorId: string, collName: string) {
+  const collRef = collection(this._firestore, collName);
+  const q = query(collRef, where('uid', '==', doctorId));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    const doc = querySnapshot.docs[0]; // tomamos el primero (debería ser único)
+    return doc.data() as any;
+  }
+
+  return null; // o throw new Error("No se encontró el doctor");
+}
+
+
   async obtenerHistorias() {
-    let historiasClinicasA: Turno[] = [];
+    let historiasClinicasA: any[] = [];
     let pacientes = await this.authService.getAllPacientes();
     let especialidades = await this.authService.obtenerEspecialidades();
     let especialistas = await this.authService.obtenerEspecialistas();
@@ -118,10 +145,14 @@ export default class UsuariosPacientesComponent {
         break;
     }
 
+    console.log("HISTORIA CLINICA AAAAAAAAAAAA");
+    console.log(historiasClinicasA);
+
     for (const historia of historiasClinicasA) {
-      const pacienteEncontrado = pacientes.find(
-        (p) => p.uid === historia.idPaciente
-      );
+      const pacienteEncontrado = await this.getUserById(historia.paciente, "pacientes");
+      // const pacienteEncontrado = pacientes.find(
+      //   (p) => p.uid === historia.idPaciente
+      // );
 
       if (pacienteEncontrado) {
         const nombrePaciente = pacienteEncontrado.nombre;
@@ -133,12 +164,16 @@ export default class UsuariosPacientesComponent {
         historia.Paciente = 'Desconocido';
       }
 
-      historia.Especialista =
-        especialistas.find((e) => e.uid === historia.idEspecialista)?.nombre ||
-        'Desconocido';
-      historia.Especialidad =
-        especialidades.find((e) => e.id === historia.idEspecialidad)?.nombre ||
-        'Desconocido';
+      // const medico = await this.getUserById(historia.especialistas, "especialistas");
+
+      // historia.Especialista = medico.nombre;
+      // historia.Especialista =
+      //   especialistas.find((e) => e.uid === historia.idEspecialista)?.nombre ||
+      //   'Desconocido';
+      historia.Especialidad = historia.especialidad;
+      // historia.Especialidad =
+      //   especialidades.find((e) => e.id === historia.idEspecialidad)?.nombre ||
+      //   'Desconocido';
     }
 
     this.historiasClinicas = historiasClinicasA.filter(
@@ -146,8 +181,10 @@ export default class UsuariosPacientesComponent {
     );
 
     // Evitar duplicados en historiasClinicasUnicas
+    console.log("QQQQQQQQQQQQQQQQQQQQQQQQQ");
     this.historiasClinicasUnicas = Array.from(new Set(this.historiasClinicas.map(a => a.Paciente)))
       .map(Paciente => {
+        console.log(Paciente);
         return this.historiasClinicas.find(a => a.Paciente === Paciente);
       });
 

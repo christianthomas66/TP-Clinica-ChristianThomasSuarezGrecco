@@ -2,7 +2,7 @@ import { EspecialistaNavbarComponent } from './../../especialista-navbar/especia
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from '../../../services/auth.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Turno } from '../../../clases/turno';
 import Swal from 'sweetalert2';
@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { HistoriaclinicaComponent } from '../historiaclinica/historiaclinica.component';
 import { fadeScaleAnimation } from '../../../animacion';
+import { doc, Firestore, getDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-especialista',
@@ -76,10 +77,15 @@ export default class EspecialistaComponent{
 
   constructor(
     private firestoreService: AuthService,
+    private _firestore: Firestore,
     private spinner: NgxSpinnerService
   ) {}
 
   async ngOnInit(): Promise<void> {
+    console.log("ESPECIALISTA COMPONENT");
+    this.turnosFiltrados.subscribe(x => {
+      console.log(x);
+    })
     this.spinner.show();
     this.loading = true;
     
@@ -94,7 +100,14 @@ export default class EspecialistaComponent{
     this.loading = false;
   }
 
+  obtenerEspecialidad(id: string): Observable<any> {
+    console.log(`Buscar la especialidad con el ID ${id}`);
+    const docRef = doc(this._firestore, 'especialidades', id);
 
+    return from(getDoc(docRef)).pipe(
+      map((docSnap) => docSnap.exists() ? docSnap.data() : null)
+    );
+  }
 
   async cargarTurnos() {
     if (this.especialistaId !== '') {

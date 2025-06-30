@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { AdminNavbarComponent } from '../admin-navbar/admin-navbar.component';
 import { RouterOutlet } from '@angular/router';
 import { fadeScaleAnimation } from '../../../animacion';
+import { collection, Firestore, getDocs, query, where } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-seccionturnosadmin',
@@ -35,10 +36,19 @@ export default class SeccionturnosadminComponent {
     setTimeout(() => {
       this.turnosFiltrados = this._turnos.asObservable().pipe(
         map((turnos) => {
+          console.log("OBSERVABLE: ");
+          console.log(turnos);
           let filtro = this.filtro.nativeElement.value.toLowerCase();
+          
+          console.log("===== FILTRO =====");
           return turnos.filter((turno) => {
+            console.log(turno);
             let especialidad = turno.Especialidad.toLowerCase();
             let especialista = turno.Especialista.toLowerCase();
+            console.log(especialista);
+            console.log(filtro);
+            console.log("=======================================");
+
             return (
               especialidad.includes(filtro) || especialista.includes(filtro)
             );
@@ -51,6 +61,7 @@ export default class SeccionturnosadminComponent {
 
   constructor(
     private firestoreService: AuthService,
+    private _firestore: Firestore,
     private spinner: NgxSpinnerService
   ) {}
 
@@ -80,23 +91,57 @@ export default class SeccionturnosadminComponent {
       mapPacientes[paciente.uid] = paciente;
     });
 
+    console.log("===== SECCION TURNOS ADMIN =====");
     for (let turno of turnos) {
-      let especialidad = especialidades.find(
-        (especialidad) => especialidad.id === turno.idEspecialidad
+      let especialidad = especialidades.find((especialidad) => {
+          console.log(especialidad);
+          console.log(turno.especialidad);
+
+          return especialidad.nombre == turno.especialidad
+        }
       );
+
+      console.log("LA ESPECIALIDAD ES: ");
+      console.log(especialidad);
+
       turno.Especialidad = especialidad.nombre;
       turno.idEspecialidad = especialidad.id;
 
       let especialista = mapEspecialistas[turno.idEspecialista];
-      turno.Especialista = especialista.nombre + ' ' + especialista.apellido;
-      turno.idEspecialista = especialista.uid;
+      console.log("DEBAJO DE ESTA LINEA ESTA EL ERROR");
+      console.log(especialista);
+      console.log(turno);
+
+      const doctor = await this.getUserById(turno.especialista, "especialistas");
+      const patient = await this.getUserById(turno.paciente, "pacientes");
+
+      console.log(doctor);
+      console.log(patient);
+      turno.Especialista = doctor.nombre + ' ' + doctor.apellido;
+      turno.idEspecialista = doctor.uid;
 
       let paciente = mapPacientes[turno.idPaciente];
-      turno.Paciente = paciente.nombre + ' ' + paciente.apellido;
-      turno.idPaciente = paciente.uid;
+      turno.Paciente = patient.nombre + ' ' + patient.apellido;
+      turno.idPaciente = patient.uid;
     }
 
     this._turnos.next(turnos);
+  }
+
+  async getUserById(doctorId: string, collectionName: string) {
+    const collRef = collection(this._firestore, collectionName);
+
+    const q = query(collRef, where('uid', '==', doctorId));
+
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      const doc = querySnapshot.docs[0];
+
+      return doc.data() as any;
+    }
+
+    return null;
   }
 
   filtrarTurnos() {
